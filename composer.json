@@ -10,17 +10,15 @@
     ],
     "require": {
         "php": "^7.4",
-        "slim/slim": "4.*",
-        "firebase/php-jwt": "^5.4",
+        "monolog/monolog": "^2.3",
+        "php-di/php-di": "^6.3",
         "respect/validation": "^2.2",
+        "slim/psr7": "^1.5",
+        "slim/slim": "4.*",
         "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
-        "nunomaduro/phpinsights": "^1.14",
-        "pestphp/pest": "^1.7",
-        "phpstan/phpstan": "^0.12",
-        "phpunit/phpunit": "^9.0",
-        "vimeo/psalm": "^3.15"
+        "phpunit/phpunit": "^9.0"
     },
     "config": {
         "sort-packages": true,
