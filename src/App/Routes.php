@@ -19,6 +19,8 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/provincia', \provinciaController::class);
+    $app->group('/api/v1/{cuit:[1-9][0-9]{10}}', function ($app) {
+        $app->get('/provincia', \provinciaController::class);
+    });
 };
 // /[1-9][0-9]{10}/g

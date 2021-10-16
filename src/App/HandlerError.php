@@ -4,7 +4,7 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpMethodNotAllowedException;
 use Slim\Psr7\Response;
 
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware = $app->addErrorMiddleware($_ENV['APP_DEBUG'] === 'true', true, true);
 
 // Set the Not Found Handler
 $errorMiddleware->setErrorHandler(

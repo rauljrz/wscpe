@@ -13,6 +13,8 @@ class provinciaController extends BaseController
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
+       // $cuit = $args['cuit'];
+      //  throw new \App\Exception\NotAllow('Cuit: '.$cuit, 502);
         $provincias = array(
             array("codigo"=>20, "provincia"=>"tucuman"),
             array("codigo"=>21, "provincia"=>"mexico")
