@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Slim\Factory\AppFactory;
 use Psr\Container\ContainerInterface;
-use App\Controller\provinciaController;
 
 require __DIR__ . '/../../vendor/autoload.php';
 $baseDir = __DIR__ . '/../../';
@@ -28,11 +27,8 @@ $app = AppFactory::create();
 
 $container = $app->getContainer();
 
-require __DIR__.  '/HandlerError.php';
-
-$container->set('provinciaController', function (ContainerInterface $container) {
-    return new provinciaController($container);
-});
+require __DIR__. '/HandlerError.php';
+require __DIR__. '/Services.php';
 
 $middleware = require __DIR__. '/Middleware.php';
 $middleware($app);
