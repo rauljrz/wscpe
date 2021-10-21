@@ -13,10 +13,8 @@
 
 class consultarUltNroOrden extends baseMethod {
 
-	public function run()
+	public function run($params)
 	{		
-		$tipoCPE  = 74; // 74: Automotor, 75: Ferroviaria, 76:Flete Corto
-		$sucursal = 1;
 
 		$params = array(
 			'auth' => array(
@@ -25,15 +23,15 @@ class consultarUltNroOrden extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'sucursal' 		=> $sucursal,
-					'tipoCPE' 		=> $tipoCPE
+					'sucursal' 		=> $params['sucursal'],
+					'tipoCPE' 		=> $params['tipoCPE' ]
 				)
 		);
 
 		try {
 			$response = parent::ExecuteRequest('consultarUltNroOrden', $params);
 
-			return $this->processSuccess($response->respuesta->nroOrden);
+			return $this->processSuccess($response->respuesta);
 
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());

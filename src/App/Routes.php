@@ -23,6 +23,6 @@ return function (App $app) {
         $app->get('/consultarProvincias', \provinciaController::class);
         $app->get('/consultarLocalidadesPorProvincia/{id:[0-9]+}', \localidadController::class);
         $app->get('/consultarTiposGrano', \tipoGranoController::class);
+        $app->get('/consultarUltNroOrden', \ultNroOrdenController::class);
     });
 };
-// /[1-9][0-9]{10}/g
