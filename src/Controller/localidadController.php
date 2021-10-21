@@ -13,16 +13,12 @@ class localidadController extends BaseController
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-       // $cuit = $args['cuit'];
-        $idProvincia = $args['id'];
-       var_dump($idProvincia); 
-      //  throw new \App\Exception\NotAllow('Cuit: '.$cuit, 502);
-        $provincias = array(
-            array("codigo"=>20, "provincia"=>"tucuman"),
-            array("codigo"=>21, "provincia"=>"mexico")
-        );
+        $data  = $this->wsCPE($args['cuit'])
+                      ->consultarLocalidadesPorProvincia
+                      ->run(array('idProvincia' => $args['id'])
+                      );
 
-        return $this->jsonResponse($response, 'success', $provincias, 200); 
+        return $this->jsonResponse($response, 'success', $data, 200); 
     }
 
 }
