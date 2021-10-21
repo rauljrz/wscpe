@@ -9,3 +9,5 @@
 /.phpunit.result.cache
 composer.lock
 /.idea/*
+/certificados/
+/token/

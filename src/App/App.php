@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use Slim\Factory\AppFactory;
-use Psr\Container\ContainerInterface;
 
 require __DIR__ . '/../../vendor/autoload.php';
 $baseDir = __DIR__ . '/../../';
@@ -12,7 +11,7 @@ $envFile = $baseDir . '.env';
 if (file_exists($envFile)) {
     $dotenv->load();
 }
-$dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS', 'DB_PORT']);
+//$dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS', 'DB_PORT']);
 
 $container = new \DI\Container();
 $settings = require __DIR__ . '/Settings.php';

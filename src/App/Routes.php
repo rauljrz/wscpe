@@ -22,6 +22,7 @@ return function (App $app) {
     $app->group('/api/v1/{cuit:[1-9][0-9]{10}}', function ($app) {
         $app->get('/consultarProvincias', \provinciaController::class);
         $app->get('/consultarLocalidades/{id:[0-9]+}', \localidadController::class);
+        $app->get('/consultarTiposGrano', \tipoGranoController::class);
     });
 };
 // /[1-9][0-9]{10}/g

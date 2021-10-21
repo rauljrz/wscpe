@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Afip\wsAfip;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface AS Response;
 use Psr\Http\Message\ServerRequestInterface AS Request;
@@ -18,6 +19,30 @@ abstract class BaseController
     }
 
     /**
+     * @param int $cuit
+     */
+    protected function wsCPE($cuit) {
+        // $cuit = $args['cuit'];
+        $baseDir = __DIR__ . '/../..';
+
+        $folder_Token = $baseDir . $_SERVER['DIR_Token'];
+        $folder_Certf = $baseDir . $_SERVER['DIR_Certf'];
+        $folder_Logger= $baseDir . $_SERVER['DIR_Log'];
+
+        $production = $_SERVER['PRODUCTION'];
+
+        $wsAfip = new wsAfip(array(
+			'CUIT'      => $cuit,
+			'production'=> $production,
+			'res_folder'=> $folder_Certf,
+			'ta_folder' => $folder_Token,
+            'app_debug' => $_ENV['APP_DEBUG'],
+            'log_folder'=> $folder_Logger)
+        );
+        return $wsAfip->wsCPE;
+    }
+
+    /**
      * @param array|object|null $message
      */
     protected function jsonResponse(
@@ -26,6 +51,7 @@ abstract class BaseController
         $message,
         int $code
     ): Response {
+
         $result = [
             'code' => $code,
             'status' => $status,
