@@ -11,44 +11,43 @@
 
 class autorizarCPEAutomotor extends baseMethod {
 
-	public function run()
+	public function run($input)
 	{		
 		// cabecera
-		$tipoCP               = 74; // 74: Automotor, 75: Ferroviaria, 76: (274)Flete Corto
-		$cuitSolicitante      = 20111111112;
-		$sucursal             = 212;
-		$nroOrden             = 5;
+		$tipoCP               = $input['cabecera']['tipoCP'];
+		$cuitSolicitante      = $input['cabecera']['cuitSolicitante'];
+		$sucursal             = $input['cabecera']['sucursal'];
+		$nroOrden             = $input['cabecera']['nroOrden'];
 		// origen - operador
-		$codProvinciaOperador = 5;
-		$codLocalidadOperador = 287;
-		$plantaOperador       = 202770;
+		$codProvinciaOperador = $input['solicitud']['origen']['operador']['codProvinciaOperador'];
+		$codLocalidadOperador = $input['solicitud']['origen']['operador']['codLocalidadOperador'];
+		$plantaOperador       = $input['solicitud']['origen']['operador']['plantaOperador'];
 		//productor
-		$codProvinciaProductor= 1;
-		$codLocalidadProductor= 1069;
+		$codProvinciaProductor= $input['solicitud']['origen']['productor']['codProvinciaProductor'];
+		$codLocalidadProductor= $input['solicitud']['origen']['productor']['codLocalidadProductor'];
 
-		$correspondeRetiroProductor= 0;
-		$esSolicitanteCampo        = 1;
+		$correspondeRetiroProductor= $input['solicitud']['origen']['correspondeRetiroProductor'];
+		$esSolicitanteCampo        = $input['solicitud']['origen']['esSolicitanteCampo'];
 		// datosCarga
-		$codGrano  = 23;
-		$cosecha   = 2021;
-		$pesoBruto = 1520;
-		$pesoTara  = 123;
+		$codGrano  = $input['solicitud']['datosCarga']['codGrano'];
+		$cosecha   = $input['solicitud']['datosCarga']['cosecha'];
+		$pesoBruto = $input['solicitud']['datosCarga']['pesoBruto'];
+		$pesoTara  = $input['solicitud']['datosCarga']['pesoTara'];
 		// destino
-		$cuitDestino        = 27000000014;
-		$esDestinoCampo     = 0;
-		$codProvinciaDestino= 5;
-		$codLocalidadDestino= 287;
-		$plantaDestino      = 1782;
+		$cuitDestino        = $input['solicitud']['destino']['cuitDestino'];
+		$esDestinoCampo     = $input['solicitud']['destino']['esDestinoCampo'];
+		$codProvinciaDestino= $input['solicitud']['destino']['codProvinciaDestino'];
+		$codLocalidadDestino= $input['solicitud']['destino']['codLocalidadDestino'];
+		$plantaDestino      = $input['solicitud']['destino']['plantaDestino'];
 		// destinatario
-		$cuitDestinatario  = 27000000014;
+		$cuitDestinatario  = $input['solicitud']['destinatario']['cuitDestinatario'];
 		// transporte
-		$cuitTransportista = 20120372913;
-		$dominio           = 'HO014EX';
-//		$fechaHoraPartida  = '2021-09-03T12:47:22';
-		$fechaHoraPartida  = '2021-10-19T13:47:22';
-		$kmRecorrer        = 1003;
-		$cuitChofer        = 20120372913;
-		$mercaderiaFumigada= 1;
+		$cuitTransportista = $input['solicitud']['transporte']['cuitTransportista'];
+		$dominio           = $input['solicitud']['transporte']['dominio'];
+		$fechaHoraPartida  = $input['solicitud']['transporte']['fechaHoraPartida'];
+		$kmRecorrer        = $input['solicitud']['transporte']['kmRecorrer'];
+		$cuitChofer        = $input['solicitud']['transporte']['cuitChofer'];
+		$mercaderiaFumigada= $input['solicitud']['transporte']['mercaderiaFumigada'];
 
 		$params = array(
 			'auth' => array(

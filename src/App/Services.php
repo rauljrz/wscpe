@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\autorizarCPEAutomotorController;
 use Psr\Container\ContainerInterface;
 use App\Controller\provinciaController;
 use App\Controller\localidadController;
@@ -20,4 +21,8 @@ $container->set('tipoGranoController', function (ContainerInterface $container) 
 
 $container->set('ultNroOrdenController', function (ContainerInterface $container) {
     return new ultNroOrdenController($container);
+});
+
+$container->set('autorizarCPEAutomotorController', function (ContainerInterface $container) {
+    return new autorizarCPEAutomotorController($container);
 });
