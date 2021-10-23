@@ -13,7 +13,7 @@
 
 class consultarUltNroOrden extends baseMethod {
 
-	public function run($params)
+	public function run($input)
 	{		
 
 		$params = array(
@@ -23,8 +23,8 @@ class consultarUltNroOrden extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'sucursal' 		=> $params['sucursal'],
-					'tipoCPE' 		=> $params['tipoCPE' ]
+					'sucursal' 		=> $input['sucursal'],
+					'tipoCPE' 		=> $input['tipoCPE' ]
 				)
 		);
 
