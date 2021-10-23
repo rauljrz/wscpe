@@ -142,7 +142,7 @@ class wsAfip {
 		}
 
 		if (!isset($options['log_folder'])) {
-			$this->LOG_FOLDER = __DIR__.'/log/';
+			$this->LOG_FOLDER = __DIR__.'/logs/';
 		} else {
 			$this->LOG_FOLDER = $options['log_folder'];
 		}
