@@ -15,8 +15,7 @@ class localidadController extends BaseController
     {
         $data  = $this->wsCPE($args['cuit'])
                       ->consultarLocalidadesPorProvincia
-                      ->run(array('idProvincia' => $args['id'])
-                      );
+                      ->run($args['id']);
 
         return $this->jsonResponse($response, 'success', $data, 200); 
     }
