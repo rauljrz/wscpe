@@ -46,6 +46,7 @@ class autorizarCPEAutomotor extends baseMethod {
 		$dominio           = $input['solicitud']['transporte']['dominio'];
 		$fechaHoraPartida  = $input['solicitud']['transporte']['fechaHoraPartida'];
 		$kmRecorrer        = $input['solicitud']['transporte']['kmRecorrer'];
+		$codigoTurno       = $input['solicitud']['transporte']['codigoTurno'];
 		$cuitChofer        = $input['solicitud']['transporte']['cuitChofer'];
 		$mercaderiaFumigada= $input['solicitud']['transporte']['mercaderiaFumigada'];
 
@@ -63,15 +64,16 @@ class autorizarCPEAutomotor extends baseMethod {
 						'nroOrden'        => $nroOrden
 					),
 					'origen' => array(
-						// 'operador' => array(
-						// 	'codProvincia' => $codProvinciaOperador,
-						// 	'codLocalidad' => $codLocalidadOperador,
-						// 	'planta'       => $plantaOperador
-						// ),
-						'productor' => array(
-							'codProvincia' => $codProvinciaProductor,
-							'codLocalidad' => $codLocalidadProductor
+						'operador' => array(
+							'codProvincia' => $codProvinciaOperador,
+							'codLocalidad' => $codLocalidadOperador,
+							'planta'       => $plantaOperador
 						)
+						//,
+						// 'productor' => array(
+						// 	'codProvincia' => $codProvinciaProductor,
+						// 	'codLocalidad' => $codLocalidadProductor
+						// )
 					),
 					'correspondeRetiroProductor' => $correspondeRetiroProductor,
 					'esSolicitanteCampo' 		 => $esSolicitanteCampo,
@@ -106,6 +108,7 @@ class autorizarCPEAutomotor extends baseMethod {
 						'dominio'           => $dominio,
 						'fechaHoraPartida'  => $fechaHoraPartida,
 						'kmRecorrer'        => $kmRecorrer,
+						'codigoTurno'		=> $codigoTurno,
 						'cuitChofer'        => $cuitChofer,
 						'mercaderiaFumigada' => $mercaderiaFumigada
 					)
@@ -114,8 +117,7 @@ class autorizarCPEAutomotor extends baseMethod {
 
 		try {
 			$response = parent::ExecuteRequest('autorizarCPEAutomotor', $params);
-			//var_dump($response);
-			if (!isset($response->respuesta->nroCTG)){
+			if (!isset($response->respuesta)){
 				return $this->processSuccess($response->respuesta);
 			}
 			//var_dump($response->respuesta->nroOrden); die();
