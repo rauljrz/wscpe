@@ -25,5 +25,6 @@ return function (App $app) {
         $app->get('/consultarTiposGrano', \tipoGranoController::class);
         $app->get('/consultarUltNroOrden', \ultNroOrdenController::class);
         $app->post('/autorizarCPEAutomotor', \autorizarCPEAutomotorController::class);
+        $app->get('/consultarCPEAutomotor', \consultarCPEAutomotorController::class);
     });
 };

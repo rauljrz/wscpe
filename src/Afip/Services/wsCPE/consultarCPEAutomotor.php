@@ -11,11 +11,8 @@
 
 class consultarCPEAutomotor extends baseMethod {
 
-	public function run()
+	public function run($input)
 	{		
-		$tipoCPE = 74; // 74: Automotor, 75: Ferroviaria, 76:Flete Corto
-		$sucursal = 212;
-		$nroOrden = 2;
 		$params = array(
 			'auth' => array(
 					'token' 			=> $this->ta->token,
@@ -23,19 +20,18 @@ class consultarCPEAutomotor extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'tipoCPE'       => $tipoCPE,
-					'sucursal'      => $sucursal,
-					'nroOrden'      => $nroOrden
+					'sucursal' 		=> $input['sucursal'],
+					'tipoCPE' 		=> $input['tipoCPE' ],
+					'nroOrden'      => $input['nroOrden']
 				)
 		);
 
 		try {
 			$response = parent::ExecuteRequest('consultarCPEAutomotor', $params);
-var_dump($response);
-			if (isset($response->respuesta->errores)){
-				return $this->processError($response->respuesta->errores);
+			if (!isset($response->respuesta)){
+				return $this->processSuccess($response->respuesta);
 			}
-			return $this->processSuccess($response->respuesta->cartaPorte);
+			return $this->processError($response->respuesta->errores);
 
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());

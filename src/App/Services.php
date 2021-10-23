@@ -1,7 +1,8 @@
 <?php
 
-use App\Controller\autorizarCPEAutomotorController;
 use Psr\Container\ContainerInterface;
+use App\Controller\autorizarCPEAutomotorController;
+use App\Controller\consultarCPEAutomotorController;
 use App\Controller\provinciaController;
 use App\Controller\localidadController;
 use App\Controller\tipoGranoController;
@@ -25,4 +26,8 @@ $container->set('ultNroOrdenController', function (ContainerInterface $container
 
 $container->set('autorizarCPEAutomotorController', function (ContainerInterface $container) {
     return new autorizarCPEAutomotorController($container);
+});
+
+$container->set('consultarCPEAutomotorController', function (ContainerInterface $container) {
+    return new consultarCPEAutomotorController($container);
 });
