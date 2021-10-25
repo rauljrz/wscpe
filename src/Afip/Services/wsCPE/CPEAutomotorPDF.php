@@ -20,18 +20,16 @@ class CPEAutomotorPDF extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'cuitSolicitante' 		=> $input['cuitSolicitante'],
-					'nroCTG' 		=> $input['nroCTG' ]
+					'cuitSolicitante' => $input['cuitSolicitante'],
+					'nroCTG' 		  => $input['nroCTG' ]
 				)
 		);
 		try {
 			$response = parent::ExecuteRequest('consultarCPEAutomotor', $params);
 
 			if (isset($response->respuesta->pdf)){
-                $pdf_64 = base64_encode($response->respuesta->pdf);
-
                 $message = array(
-                    'pdf'             => $pdf_64,
+                    'pdf'             => base64_encode($response->respuesta->pdf),
 					'cuitSolicitante' => $input['cuitSolicitante'],
 					'nroCTG' 		  => $input['nroCTG' ]
                 );
