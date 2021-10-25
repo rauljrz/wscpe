@@ -43,13 +43,6 @@ class baseMethod extends AfipWebService {
     protected function jsonResponse(string $status, $message, int $code)
     {
         return $message;
-        return json_encode(
-            [
-                'code'   => $code,
-                'status' => $status,
-                'message'=> $message,
-            ], JSON_PRETTY_PRINT
-        );
     }
 
 }
