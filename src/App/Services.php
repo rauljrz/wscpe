@@ -3,6 +3,7 @@
 use Psr\Container\ContainerInterface;
 use App\Controller\autorizarCPEAutomotorController;
 use App\Controller\consultarCPEAutomotorController;
+use App\Controller\CPEAutomotorPDFController;
 use App\Controller\provinciaController;
 use App\Controller\localidadController;
 use App\Controller\tipoGranoController;
@@ -30,4 +31,8 @@ $container->set('autorizarCPEAutomotorController', function (ContainerInterface 
 
 $container->set('consultarCPEAutomotorController', function (ContainerInterface $container) {
     return new consultarCPEAutomotorController($container);
+});
+
+$container->set('CPEAutomotorPDFController', function (ContainerInterface $container) {
+    return new CPEAutomotorPDFController($container);
 });

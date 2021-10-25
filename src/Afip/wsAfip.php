@@ -160,7 +160,6 @@ class wsAfip {
 		} else {
 			$this->WSAA_URL = 'https://wsaahomo.afip.gov.ar/ws/services/LoginCms';
 		}
-
 		if (!file_exists($this->CERT)) 
 			throw new \Exception("Failed to open ".$this->CERT."\n", 1);
 		if (!file_exists($this->PRIVATEKEY)) 

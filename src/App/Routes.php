@@ -26,5 +26,6 @@ return function (App $app) {
         $app->get('/consultarUltNroOrden', \ultNroOrdenController::class);
         $app->post('/autorizarCPEAutomotor', \autorizarCPEAutomotorController::class);
         $app->get('/consultarCPEAutomotor', \consultarCPEAutomotorController::class);
+        $app->get('/CPEAutomotorPDF', \CPEAutomotorPDFController::class);
     });
 };
