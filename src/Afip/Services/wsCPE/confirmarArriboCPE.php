@@ -13,14 +13,8 @@
 
 class confirmarArriboCPE extends baseMethod {
 
-	public function run()
+	public function run($input)
 	{
-		$tipoCPE  = 74; 
-		$sucursal = 1; 
-		$nroOrden = 1; 
-
-		$cuitSolicitante = 20228065464;
-
 		$params = array(
 			'auth' => array(
 					'token' 			=> $this->ta->token,
@@ -28,11 +22,11 @@ class confirmarArriboCPE extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'cuitSolicitante'   => $cuitSolicitante,
+					'cuitSolicitante'   => $input['cuitSolicitante'],
 					'cartaPorte'        => array(
-							'tipoCPE'       => $tipoCPE,
-							'sucursal'      => $sucursal,
-							'nroOrden'      => $nroOrden
+							'tipoCPE'       => $input['tipoCPE'],
+							'sucursal'      => $input['sucursal'],
+							'nroOrden'      => $input['nroOrden']
 					)
 				)
 		);

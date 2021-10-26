@@ -27,5 +27,6 @@ return function (App $app) {
         $app->post('/autorizarCPEAutomotor', \autorizarCPEAutomotorController::class);
         $app->get('/consultarCPEAutomotor', \consultarCPEAutomotorController::class);
         $app->get('/CPEAutomotorPDF', \CPEAutomotorPDFController::class);
+        $app->get('/confirmarArriboCPE', \confirmarArriboCPEController::class);
     });
 };

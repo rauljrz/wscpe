@@ -2,6 +2,7 @@
 
 use Psr\Container\ContainerInterface;
 use App\Controller\autorizarCPEAutomotorController;
+use App\Controller\confirmarArriboCPEController;
 use App\Controller\consultarCPEAutomotorController;
 use App\Controller\CPEAutomotorPDFController;
 use App\Controller\provinciaController;
@@ -35,4 +36,8 @@ $container->set('consultarCPEAutomotorController', function (ContainerInterface 
 
 $container->set('CPEAutomotorPDFController', function (ContainerInterface $container) {
     return new CPEAutomotorPDFController($container);
+});
+
+$container->set('confirmarArriboCPEController', function (ContainerInterface $container) {
+    return new confirmarArriboCPEController($container);
 });
