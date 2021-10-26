@@ -13,16 +13,14 @@ class consultarCPEAutomotorController extends BaseController
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $sucursal= $request->getQueryParams()['sucursal'] ?? null;
-        $tipoCPE = $request->getQueryParams()['tipoCPE'] ?? null;
-        $nroOrden= $request->getQueryParams()['nroOrden'] ?? null;
+        $cuitSolicitante= $request->getQueryParams()['cuitSolicitante'] ?? null;
+        $nroCTG = $request->getQueryParams()['nroCTG'] ?? null;
 
         $data  = $this->wsCPE($args['cuit'])
                       ->consultarCPEAutomotor
                       ->run(array(
-                          'sucursal'=> $sucursal,
-                          'tipoCPE' => $tipoCPE,
-                          'nroOrden' => $nroOrden)
+                          'cuitSolicitante'=> $cuitSolicitante,
+                          'nroCTG' => $nroCTG)
                       );
 
         return $this->jsonResponse($response, 'success', $data, 200); 

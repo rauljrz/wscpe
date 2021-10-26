@@ -13,15 +13,8 @@
 
 class confirmacionDefinitivaCPEAutomotor extends baseMethod {
 
-	public function run()
+	public function run($input)
 	{		
-		$tipoCPE  = 74; // 74: Automotor, 75: Ferroviaria, 76:Flete Corto
-		$sucursal = 21;
-		$nroOrden = 1;
-		$cuitSolicitante  = 27000000014;
-		$pesoBrutoDescarga= 1782;
-		$pesoTaraDescarga = 100;
-
 		$params = array(
 			'auth' => array(
 					'token' 			=> $this->ta->token,
@@ -29,14 +22,14 @@ class confirmacionDefinitivaCPEAutomotor extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'cuitSolicitante'   => $cuitSolicitante,
+					'cuitSolicitante'   => $input['cuitSolicitante'],
 					'cartaPorte'        => array(
-							'tipoCPE'       => $tipoCPE,
-							'sucursal'      => $sucursal,
-							'nroOrden'      => $nroOrden
+							'tipoCPE'       => $input['tipoCPE' ],
+							'sucursal'      => $input['sucursal'],
+							'nroOrden'      => $input['nroOrden']
 					),
-					'pesoBrutoDescarga' => $pesoBrutoDescarga,
-					'pesoTaraDescarga'  => $pesoTaraDescarga
+					'pesoBrutoDescarga' => $input['pesoBrutoDescarga'],
+					'pesoTaraDescarga'  => $input['pesoTaraDescarga' ]
 				)
 		);
 

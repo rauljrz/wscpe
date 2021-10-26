@@ -28,5 +28,6 @@ return function (App $app) {
         $app->get('/consultarCPEAutomotor', \consultarCPEAutomotorController::class);
         $app->get('/CPEAutomotorPDF', \CPEAutomotorPDFController::class);
         $app->get('/confirmarArriboCPE', \confirmarArriboCPEController::class);
+        $app->get('/confirmacionDefinitiva', \confirmacionDefinitivaCPEAutomotorController::class);
     });
 };
