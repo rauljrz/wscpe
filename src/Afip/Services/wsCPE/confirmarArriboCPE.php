@@ -34,10 +34,10 @@ class confirmarArriboCPE extends baseMethod {
 		try {
 			$response = parent::ExecuteRequest('confirmarArriboCPE', $params);
 
-			if (isset($response->respuesta->errores->error)){
-				return $this->processError($response->respuesta->errores);
+			if (isset($response->respuesta)){
+			    return $this->processSuccess($response->respuesta);
 			}
-			return $this->processSuccess($response->respuesta->cartaPorte);
+			return $this->processError($response);
 
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());

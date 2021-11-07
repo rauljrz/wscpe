@@ -12,7 +12,7 @@
 class consultarCPEAutomotor extends baseMethod {
 
 	public function run($input)
-	{		
+	{
 		$params = array(
 			'auth' => array(
 					'token' 			=> $this->ta->token,
@@ -20,18 +20,20 @@ class consultarCPEAutomotor extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'sucursal' 		=> $input['sucursal'],
-					'tipoCPE' 		=> $input['tipoCPE' ],
-					'nroOrden'      => $input['nroOrden']
+					'cuitSolicitante' 	=> $input['cuitSolicitante'],
+					'nroCTG' 		    => $input['nroCTG' ]
 				)
 		);
-
 		try {
 			$response = parent::ExecuteRequest('consultarCPEAutomotor', $params);
-			if (!isset($response->respuesta)){
+
+			if (isset($response->respuesta->pdf){
+                $response->respuesta->pdf = base64_encode($response->respuesta->pdf);
+
 				return $this->processSuccess($response->respuesta);
 			}
-			return $this->processError($response->respuesta->errores);
+
+			return $this->processError($response->respuesta);
 
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());

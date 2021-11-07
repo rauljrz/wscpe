@@ -22,7 +22,6 @@ abstract class BaseController
      * @param int $cuit
      */
     protected function wsCPE($cuit) {
-        // $cuit = $args['cuit'];
         $baseDir = __DIR__ . '/../..';
 
         $folder_Token = $baseDir . $_SERVER['DIR_Token'];
@@ -30,7 +29,7 @@ abstract class BaseController
         $folder_Logger= $baseDir . $_SERVER['DIR_Log'];
 
         $production = $_SERVER['PRODUCTION'];
-        $production = TRUE;
+        $production = false;
 
         $wsAfip = new wsAfip(array(
 			'CUIT'      => $cuit,

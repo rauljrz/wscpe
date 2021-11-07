@@ -11,6 +11,7 @@ $envFile = $baseDir . '.env';
 if (file_exists($envFile)) {
     $dotenv->load();
 }
+date_default_timezone_set("America/Argentina/Buenos_Aires");
 //$dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS', 'DB_PORT']);
 
 $container = new \DI\Container();

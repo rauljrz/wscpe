@@ -14,20 +14,18 @@ class autorizarCPEAutomotor extends baseMethod {
 	public function run($input)
 	{		
 		// cabecera
-		$tipoCP               = $input['cabecera']['tipoCP'];
-		$cuitSolicitante      = $input['cabecera']['cuitSolicitante'];
-		$sucursal             = $input['cabecera']['sucursal'];
-		$nroOrden             = $input['cabecera']['nroOrden'];
-		// origen - operador
-		$codProvinciaOperador = $input['solicitud']['origen']['operador']['codProvinciaOperador'];
-		$codLocalidadOperador = $input['solicitud']['origen']['operador']['codLocalidadOperador'];
-		$plantaOperador       = $input['solicitud']['origen']['operador']['plantaOperador'];
-		//productor
-		$codProvinciaProductor= $input['solicitud']['origen']['productor']['codProvinciaProductor'];
-		$codLocalidadProductor= $input['solicitud']['origen']['productor']['codLocalidadProductor'];
-
 		$correspondeRetiroProductor= $input['solicitud']['origen']['correspondeRetiroProductor'];
 		$esSolicitanteCampo        = $input['solicitud']['origen']['esSolicitanteCampo'];
+        //retiroProductor
+        $cuitRemitenteComercialProductor = $input['solicitud']['retiroProductor']['cuitRemitenteComercialProductor'];
+        $cuitRemitenteComercialVentaPrimaria = $input['solicitud']['intervinientes']['cuitRemitenteComercialVentaPrimaria'];
+        $cuitRemitenteComercialVentaSecundaria= $input['solicitud']['intervinientes']['cuitRemitenteComercialVentaSecundaria'];
+        $cuitRemitenteComercialVentaSecundaria2= $input['solicitud']['intervinientes']['cuitRemitenteComercialVentaSecundaria2'];
+        $cuitMercadoATermino = $input['solicitud']['intervinientes']['cuitMercadoATermino'];
+        $cuitCorredorVentaPrimaria = $input['solicitud']['intervinientes']['cuitCorredorVentaPrimaria'];
+        $cuitCorredorVentaSecundaria = $input['solicitud']['intervinientes']['cuitCorredorVentaSecundaria'];
+        $cuitRepresentanteEntregador = $input['solicitud']['intervinientes']['cuitRepresentanteEntregador'];
+        $cuitRepresentanteRecibidor = $input['solicitud']['intervinientes']['cuitRepresentanteEntregador'];
 		// datosCarga
 		$codGrano  = $input['solicitud']['datosCarga']['codGrano'];
 		$cosecha   = $input['solicitud']['datosCarga']['cosecha'];
@@ -48,7 +46,53 @@ class autorizarCPEAutomotor extends baseMethod {
 		$kmRecorrer        = $input['solicitud']['transporte']['kmRecorrer'];
 		$codigoTurno       = $input['solicitud']['transporte']['codigoTurno'];
 		$cuitChofer        = $input['solicitud']['transporte']['cuitChofer'];
+        $tarifa            = $input['solicitud']['transporte']['tarifa'];
+        $cuitPagadorFlete  = $input['solicitud']['transporte']['cuitPagadorFlete'];
+        $cuitIntermediarioFlete = $input['solicitud']['transporte']['cuitIntermediarioFlete'];
 		$mercaderiaFumigada= $input['solicitud']['transporte']['mercaderiaFumigada'];
+
+
+        if ($esSolicitanteCampo==0){
+            $origen = array(
+                'operador' => array(
+                    'codProvincia' => $input['solicitud']['origen']['operador']['codProvinciaOperador'],
+                    'codLocalidad' => $input['solicitud']['origen']['operador']['codLocalidadOperador'],
+                    'planta'       => $input['solicitud']['origen']['operador']['plantaOperador']
+                ));
+        } else {
+            $origen = array(
+                'productor' => array(
+                    'codProvincia' => $input['solicitud']['origen']['productor']['codProvinciaProductor'],
+                    'codLocalidad' => $input['solicitud']['origen']['productor']['codLocalidadProductor']
+                ));
+        }
+
+    
+        $intervinientes = array();
+        if ($cuitRemitenteComercialVentaPrimaria!=0) {
+            $intervinientes['cuitRemitenteComercialVentaPrimaria'] = $cuitRemitenteComercialVentaPrimaria;
+        }
+        if ($cuitRemitenteComercialVentaSecundaria!=0) {
+            $intervinientes['cuitRemitenteComercialVentaSecundaria'] = $cuitRemitenteComercialVentaSecundaria;
+        }
+        if ($cuitRemitenteComercialVentaSecundaria2!=0) {
+            $intervinientes['cuitRemitenteComercialVentaSecundaria2'] = $cuitRemitenteComercialVentaSecundaria2;
+        }
+        if ($cuitMercadoATermino!=0) {
+            $intervinientes['cuitMercadoATermino'] = $cuitMercadoATermino;
+        }
+        if ($cuitCorredorVentaPrimaria!=0) {
+            $intervinientes['cuitCorredorVentaPrimaria'] = $cuitCorredorVentaPrimaria;
+        }
+        if ($cuitCorredorVentaSecundaria!=0) {
+            $intervinientes['cuitCorredorVentaSecundaria'] = $cuitCorredorVentaSecundaria;
+        }
+        if ($cuitRepresentanteEntregador!=0) {
+            $intervinientes['cuitRepresentanteEntregador'] = $cuitRepresentanteEntregador;
+        }
+        if ($cuitRepresentanteRecibidor!=0) {
+            $intervinientes['cuitRepresentanteRecibidor'] = $cuitRepresentanteRecibidor;
+        }
 
 		$params = array(
 			'auth' => array(
@@ -58,35 +102,15 @@ class autorizarCPEAutomotor extends baseMethod {
 				),
 			'solicitud' => array(
 					'cabecera' => array(
-						'tipoCP'          => $tipoCP,
-						'cuitSolicitante' => $cuitSolicitante,
-						'sucursal'        => $sucursal,
-						'nroOrden'        => $nroOrden
+						'tipoCP'          => $input['cabecera']['tipoCP'],
+						'cuitSolicitante' => $input['cabecera']['cuitSolicitante'],
+						'sucursal'        => $input['cabecera']['sucursal'],
+						'nroOrden'        => $input['cabecera']['nroOrden']
 					),
-					'origen' => array(
-						'operador' => array(
-							'codProvincia' => $codProvinciaOperador,
-							'codLocalidad' => $codLocalidadOperador,
-							'planta'       => $plantaOperador
-						)
-						//,
-						// 'productor' => array(
-						// 	'codProvincia' => $codProvinciaProductor,
-						// 	'codLocalidad' => $codLocalidadProductor
-						// )
-					),
+                    'origen' => $origen,
 					'correspondeRetiroProductor' => $correspondeRetiroProductor,
 					'esSolicitanteCampo' 		 => $esSolicitanteCampo,
-					// 'retiroProductor' => array(
-					// 	'certificadoCOE' => $certificadoCOE,
-					// 	'cuitRemitenteComercialProductor' => $cuitRemitenteComercialProductor
-					// ),
-					// 'intervinientes' => array(
-					// 	'cuitRemitenteComercialVentaPrimaria' => $cuitRemitenteComercialVentaPrimaria,
-					// 	'cuitRemitenteComercialVentaSecundaria' => $cuitRemitenteComercialVentaSecundaria,
-					// 	'cuitRemitenteComercialVentaSecundaria2' => $cuitRemitenteComercialVentaSecundaria2,
-
-					// )
+                    'intervinientes' => $intervinientes,
 					'datosCarga' => array(
 						'codGrano'  => $codGrano,
 						'cosecha'   => $cosecha,
@@ -108,19 +132,40 @@ class autorizarCPEAutomotor extends baseMethod {
 						'dominio'           => $dominio,
 						'fechaHoraPartida'  => $fechaHoraPartida,
 						'kmRecorrer'        => $kmRecorrer,
-						'codigoTurno'		=> $codigoTurno,
 						'cuitChofer'        => $cuitChofer,
 						'mercaderiaFumigada' => $mercaderiaFumigada
 					)
 				)
 		);
 
+        if ($cuitRemitenteComercialProductor!=0){
+            $params['solicitud']['retiroProductor']['cuitRemitenteComercialProductor']=$cuitRemitenteComercialProductor;
+        } 
+
+        if (!empty(trim($codigoTurno))){
+		    $params['solicitud']['transporte']['codigoTurno'] = $codigoTurno;
+        }
+        if ($tarifa>0){
+            $params['solicitud']['transporte']['tarifa'] = $tarifa;
+        }
+        if ($cuitPagadorFlete>0){
+            $params['solicitud']['transporte']['cuitPagadorFlete'] = $cuitPagadorFlete;
+        }
+        if ($cuitIntermediarioFlete>0){
+             $params['solicitud']['transporte']['cuitIntermediarioFlete'] = $cuitIntermediarioFlete;
+        }
+        if (isset($input['solicitud']['observaciones'])){
+		    $params['solicitud']['observaciones'] = $input['solicitud']['observaciones'];
+        }
+
 		try {
 			$response = parent::ExecuteRequest('autorizarCPEAutomotor', $params);
-			if (!isset($response->respuesta)){
+			if (isset($response->respuesta)){
+			    if (isset($response->respuesta->pdf)){
+                    $response->respuesta->pdf = base64_encode($response->respuesta->pdf);
+                }
 				return $this->processSuccess($response->respuesta);
 			}
-			//var_dump($response->respuesta->nroOrden); die();
 			return $this->processError($response->respuesta->errores);
 
 		} catch (Exception $e) {

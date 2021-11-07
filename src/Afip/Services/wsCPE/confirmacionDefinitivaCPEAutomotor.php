@@ -36,10 +36,10 @@ class confirmacionDefinitivaCPEAutomotor extends baseMethod {
 		try {
 			$response = parent::ExecuteRequest('confirmacionDefinitivaCPEAutomotor', $params);
 
-			if (isset($response->respuesta->errores)){
-				return $this->processError($response->respuesta->errores);
+			if (isset($response->respuesta)){
+			    return $this->processSuccess($response->respuesta);
 			}
-			return $this->processSuccess($response->respuesta->cartaPorte);
+			return $this->processError($response);
 
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());

@@ -83,11 +83,13 @@ class AfipWebService
 		$pathLogs = __DIR__.'/../../logs/';
 
 		if (!isset($this->soap_client)) {
+            ini_set("default_socket_timeout", 15);
 			$this->soap_client = new SoapClient($this->WSDL, array(
 				'soap_version' 	=> $this->soap_version,
 				'location' 		=> $this->URL,
 				'trace' 		=> 1,
-				'exceptions' 	=> true,
+                'exceptions' 	=> true,
+                'connection_timeout' =>15,
 				'stream_context' => stream_context_create(['ssl'=> ['ciphers'=> 'AES256-SHA','verify_peer'=> false,'verify_peer_name'=> false]])
 			)); 
 		}
@@ -101,6 +103,18 @@ class AfipWebService
 			file_put_contents($pathLogs . 'error.log', $this->soap_client->__getLastRequest(), FILE_APPEND);
         	$results = $fault->getMessage();
 		}
+
+        $transaction_log = $pathLogs . 'transaction.log';
+		file_put_contents($transaction_log, "\n#============================================================#\n", FILE_APPEND);
+		file_put_contents($transaction_log, "#Date Time........: ".date("d-m-Y G:i:s")."\n", FILE_APPEND);
+		file_put_contents($transaction_log, "#CUIT.............: ".$this->afip->CUIT."\n", FILE_APPEND);
+		file_put_contents($transaction_log, "#URL..............: ".$this->URL."\n", FILE_APPEND);
+		file_put_contents($transaction_log, "#Action...........: ".$operation."\n", FILE_APPEND);
+		file_put_contents($transaction_log, "#Response Header..: \n", FILE_APPEND);
+		file_put_contents($transaction_log, $this->soap_client->__getLastResponseHeaders()."\n", FILE_APPEND);
+		file_put_contents($transaction_log, "#Response Body....: \n", FILE_APPEND);
+		file_put_contents($transaction_log, json_encode($results)."\n", FILE_APPEND);
+		//file_put_contents($transaction_log, $this->soap_client->__getLastResponse()."\n", FILE_APPEND);
 
 		$fileName = $pathLogs . $operation.".log";
 		file_put_contents($fileName, $this->soap_client->__getLastRequest());
