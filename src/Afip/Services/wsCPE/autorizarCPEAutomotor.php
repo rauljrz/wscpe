@@ -25,7 +25,7 @@ class autorizarCPEAutomotor extends baseMethod {
         $cuitCorredorVentaPrimaria = $input['solicitud']['intervinientes']['cuitCorredorVentaPrimaria'];
         $cuitCorredorVentaSecundaria = $input['solicitud']['intervinientes']['cuitCorredorVentaSecundaria'];
         $cuitRepresentanteEntregador = $input['solicitud']['intervinientes']['cuitRepresentanteEntregador'];
-        $cuitRepresentanteRecibidor = $input['solicitud']['intervinientes']['cuitRepresentanteEntregador'];
+        $cuitRepresentanteRecibidor = $input['solicitud']['intervinientes']['cuitRepresentanteRecibidor'];
 		// datosCarga
 		$codGrano  = $input['solicitud']['datosCarga']['codGrano'];
 		$cosecha   = $input['solicitud']['datosCarga']['cosecha'];
