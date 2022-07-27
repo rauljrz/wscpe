@@ -32,9 +32,7 @@ class consultarCPEPorDestino extends baseMethod {
 		);
 
 		try {
-			var_dump($params);
 			$response = parent::ExecuteRequest('consultarCPEPorDestino', $params);
-var_dump($response); die();
 			if (isset($response->respuesta->errores)){
 				return $this->processError($response->respuesta->errores);
 			}

@@ -18,7 +18,7 @@ return function (Container $container) {
         $processor = new UidProcessor();
         $logger->pushProcessor($processor);
 
-        $handler = new StreamHandler($settings['path'], $settings['level']);
+        $handler = new StreamHandler($settings['path'].$settings['file'], $settings['level']);
         $logger->pushHandler($handler);
 
         return $logger;

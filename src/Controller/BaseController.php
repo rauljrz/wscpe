@@ -8,38 +8,55 @@ use App\Afip\wsAfip;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface AS Response;
 use Psr\Http\Message\ServerRequestInterface AS Request;
+use Respect\Validation\Rules\Uppercase;
 
 abstract class BaseController
 {
     private $container;
+    private $folder_Logger;
+    private $folder_Certf;
+    private $folder_Token;
+    private $production;
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+        $baseDir = $this->container->get('settings')['baseDir'];
+
+        $this->production = (strtoupper($_SERVER['PRODUCTION'])==='TRUE');
+        $this->folder_Certf = $baseDir . $_SERVER['DIR_Certf'];
+        $this->folder_Logger= $this->container->get('settings')['logger']['path'];
+        $this->folder_Token = $baseDir . $_SERVER['DIR_Token']; 
     }
 
     /**
      * @param int $cuit
      */
     protected function wsCPE($cuit) {
-        $baseDir = __DIR__ . '/../..';
-
-        $folder_Token = $baseDir . $_SERVER['DIR_Token'];
-        $folder_Certf = $baseDir . $_SERVER['DIR_Certf'];
-        $folder_Logger= $baseDir . $_SERVER['DIR_Log'];
-
-        $production = $_SERVER['PRODUCTION'];
-        $production = false;
-
         $wsAfip = new wsAfip(array(
 			'CUIT'      => $cuit,
-			'production'=> $production,
-			'res_folder'=> $folder_Certf,
-			'ta_folder' => $folder_Token,
+			'production'=> $this->production,
+			'res_folder'=> $this->folder_Certf,
+			'ta_folder' => $this->folder_Token,
             'app_debug' => $_ENV['APP_DEBUG'],
-            'log_folder'=> $folder_Logger)
+            'log_folder'=> $this->folder_Logger)
         );
         return $wsAfip->wsCPE;
+    }
+
+    /**
+     * @param int $cuit
+     */
+    protected function wsLPG($cuit) {
+        $wsAfip = new wsAfip(array(
+			'CUIT'      => $cuit,
+			'production'=> $this->production,
+			'res_folder'=> $this->folder_Certf,
+			'ta_folder' => $this->folder_Token,
+            'app_debug' => $_ENV['APP_DEBUG'],
+            'log_folder'=> $this->folder_Logger)
+        );
+        return $wsAfip->wsLPG;
     }
 
     /**

@@ -94,7 +94,8 @@ class wsAfip {
 		'RegisterInscriptionProof',
 		'RegisterScopeTen',
 		'RegisterScopeThirteen',
-		'wsCPE'
+		'wsCPE',
+		'wsLPG'
 	);
 
 	function __construct($options)
@@ -181,9 +182,11 @@ class wsAfip {
 	**/
 	public function GetServiceTA($service, $continue = TRUE)
 	{
-		if (file_exists($this->TA_FOLDER.'TA-'.$this->options['CUIT'].'-'.$service.($this->options['production'] === TRUE ? '-production' : '').'.xml')) {
+		$typeProduct = ($this->options['production'] === TRUE ? '-production' : '');
+		$fileNameXML = $this->TA_FOLDER.'TA-'.$this->options['CUIT'].'-'.$service.$typeProduct.'.xml';
 
-			$TA = new \SimpleXMLElement(file_get_contents($this->TA_FOLDER.'TA-'.$this->options['CUIT'].'-'.$service.($this->options['production'] === TRUE ? '-production' : '').'.xml'));
+		if (file_exists($fileNameXML)) {
+			$TA = new \SimpleXMLElement(file_get_contents($fileNameXML));
 
 			$actual_time 		= new \DateTime(date('c',date('U')+600));
 			$expiration_time 	= new \DateTime($TA->header->expirationTime);
@@ -244,7 +247,7 @@ class wsAfip {
 		}
 		fclose($inf);
 
-		if (!$this->isLogging){ 
+		if (!$this->isLogging and 1==0){ 
 			unlink($xmlFile_Service);
 			unlink($tmpFile_Service);
 		}

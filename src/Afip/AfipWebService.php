@@ -96,7 +96,6 @@ class AfipWebService
 
 		try {
             $results = $this->soap_client->{$operation}($params);
-
 			$this->_CheckErrors($operation, $results);
 
         } catch (SoapFault $fault) {
@@ -137,6 +136,6 @@ class AfipWebService
 	private function _CheckErrors($operation, $results)
 	{
 		if (is_soap_fault($results)) 
-			throw new Exception("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n", 4);
+			throw new Exception("SOAP Fault AFIP: ".$results->faultcode."\n".$results->faultstring."\n", 4);
 	}
 }

@@ -10,6 +10,7 @@ use App\Controller\provinciaController;
 use App\Controller\localidadController;
 use App\Controller\tipoGranoController;
 use App\Controller\ultNroOrdenController;
+use App\Controller\cgBuscarCtgController;
 
 $container->set('provinciaController', function (ContainerInterface $container) {
     return new provinciaController($container);
@@ -45,4 +46,8 @@ $container->set('confirmarArriboCPEController', function (ContainerInterface $co
 
 $container->set('confirmacionDefinitivaCPEAutomotorController', function (ContainerInterface $container) {
     return new confirmacionDefinitivaCPEAutomotorController($container);
+});
+
+$container->set('cgBuscarCtgController', function (ContainerInterface $container) {
+    return new cgBuscarCtgController($container);
 });
