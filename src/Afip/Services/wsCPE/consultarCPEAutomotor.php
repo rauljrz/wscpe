@@ -20,14 +20,14 @@ class consultarCPEAutomotor extends baseMethod {
 					'cuitRepresentada' 	=> $this->cuit
 				),
 			'solicitud' => array(
-					'cuitSolicitante' 	=> $input['cuitSolicitante'],
-					'nroCTG' 		    => $input['nroCTG' ]
+					'cuitSolicitante' 		=> $input['cuitSolicitante'],
+					'nroCTG' 		=> $input['nroCTG' ]
 				)
 		);
 		try {
 			$response = parent::ExecuteRequest('consultarCPEAutomotor', $params);
 
-			if (isset($response->respuesta->pdf){
+			if (isset($response->respuesta->pdf)){
                 $response->respuesta->pdf = base64_encode($response->respuesta->pdf);
 
 				return $this->processSuccess($response->respuesta);

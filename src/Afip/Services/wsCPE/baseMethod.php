@@ -13,7 +13,12 @@ class baseMethod extends AfipWebService {
 
 	var $soap_version 	= SOAP_1_1;
 	var $WSDL 			= 'ws_scpe-production.wsdl';
-	var $URL 			= 'https://serviciosjava.afip.gob.ar/wscpe/services/soap';
+    /* rjrz 2023.09.25 - 
+        Cambiada por que no existe la direccion anterior... fue cambiada por afip
+        
+    var $URL 			= 'https://serviciosjava.afip.gob.ar/wscpe/services/soap';
+    */
+  	var $URL 			= 'https://cpea-ws.afip.gob.ar/wscpe/services/soap';
 	var $WSDL_TEST 		= 'ws_scpe.wsdl';
 	var $URL_TEST 		= 'https://fwshomo.afip.gov.ar/wscpe/services/soap';
 
