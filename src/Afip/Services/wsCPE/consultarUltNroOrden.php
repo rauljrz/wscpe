@@ -30,6 +30,7 @@ class consultarUltNroOrden extends baseMethod {
 
 		try {
 			$response = parent::ExecuteRequest('consultarUltNroOrden', $params);
+            if (is_string($response)) throw new \Exception($response);
 
 			return $this->processSuccess($response->respuesta);
 

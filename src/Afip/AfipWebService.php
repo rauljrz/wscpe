@@ -97,10 +97,16 @@ class AfipWebService
 		try {
             $results = $this->soap_client->{$operation}($params);
 			$this->_CheckErrors($operation, $results);
+			file_put_contents($pathLogs . $this->afip->CUIT."_".$operation."_response.log", $this->soap_client->__getLastResponse());
+			file_put_contents($pathLogs . $this->afip->CUIT."_".$operation."_request.log", $this->soap_client->__getLastRequest());
 
         } catch (SoapFault $fault) {
-			file_put_contents($pathLogs . 'error.log', $this->soap_client->__getLastRequest(), FILE_APPEND);
         	$results = $fault->getMessage();
+			file_put_contents($pathLogs . 'error.log', $results);
+			file_put_contents($pathLogs . $this->afip->CUIT."_".$operation."_request.log", $results."\n", FILE_APPEND);
+			file_put_contents($pathLogs . $this->afip->CUIT."_".$operation."_request.log", json_encode($params));
+			
+			file_put_contents($pathLogs . $this->afip->CUIT."_".$operation."_response.log", $results);
 		}
 
         $transaction_log = $pathLogs . 'transaction.log';
@@ -114,9 +120,6 @@ class AfipWebService
 		file_put_contents($transaction_log, "#Response Body....: \n", FILE_APPEND);
 		file_put_contents($transaction_log, json_encode($results)."\n", FILE_APPEND);
 		//file_put_contents($transaction_log, $this->soap_client->__getLastResponse()."\n", FILE_APPEND);
-
-		$fileName = $pathLogs . $operation.".log";
-		file_put_contents($fileName, $this->soap_client->__getLastRequest());
 
 		return $results;
 	}

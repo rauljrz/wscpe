@@ -160,6 +160,8 @@ class autorizarCPEAutomotor extends baseMethod {
 
 		try {
 			$response = parent::ExecuteRequest('autorizarCPEAutomotor', $params);
+			if (is_string($response)) throw new \Exception($response);
+
 			if (isset($response->respuesta)){
 			    if (isset($response->respuesta->pdf)){
                     $response->respuesta->pdf = base64_encode($response->respuesta->pdf);

@@ -20,15 +20,17 @@ return function (App $app) {
     });
 
     $app->group('/api/v1/{cuit:[1-9][0-9]{10}}', function ($app) {
-        $app->get('/consultarProvincias', \provinciaController::class);
-        $app->get('/consultarLocalidadesPorProvincia/{id:[0-9]+}', \localidadController::class);
-        $app->get('/consultarTiposGrano', \tipoGranoController::class);
-        $app->get('/consultarUltNroOrden', \ultNroOrdenController::class);
-        $app->post('/autorizarCPEAutomotor', \autorizarCPEAutomotorController::class);
-        $app->get('/consultarCPEAutomotor', \consultarCPEAutomotorController::class);
-        $app->get('/CPEAutomotorPDF', \CPEAutomotorPDFController::class);
-        $app->get('/confirmarArriboCPE', \confirmarArriboCPEController::class);
-        $app->get('/confirmacionDefinitiva', \confirmacionDefinitivaCPEAutomotorController::class);
-        $app->get('/cgBuscarCtg', \cgBuscarCtgController::class);
+        $app->post('/autorizarCPEAutomotor', autorizarCPEAutomotorController::class);
+        $app->post('/autorizarCPEAutomotorDG', autorizarCPEAutomotorDGController::class);
+
+        $app->get('/consultarProvincias', provinciaController::class);
+        $app->get('/consultarLocalidadesPorProvincia/{id:[0-9]+}', localidadController::class);
+        $app->get('/consultarTiposGrano', tipoGranoController::class);
+        $app->get('/consultarUltNroOrden', ultNroOrdenController::class);
+        $app->get('/consultarCPEAutomotor', consultarCPEAutomotorController::class);
+        $app->get('/CPEAutomotorPDF', CPEAutomotorPDFController::class);
+        $app->get('/confirmarArriboCPE', confirmarArriboCPEController::class);
+        $app->get('/confirmacionDefinitiva', confirmacionDefinitivaCPEAutomotorController::class);
+        $app->get('/cgBuscarCtg', cgBuscarCtgController::class);
     });
 };

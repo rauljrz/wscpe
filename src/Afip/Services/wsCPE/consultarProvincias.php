@@ -24,6 +24,9 @@ class consultarProvincias extends baseMethod {
 		try {
 			$response = parent::ExecuteRequest('consultarProvincias', $params);
 
+			if ($response == 'Not Found')
+				return $this->processError('Not Found. URL.');
+
 			return $this->processSuccess($response->respuesta->provincia);
 
 		} catch (Exception $e) {

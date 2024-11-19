@@ -2,6 +2,7 @@
 
 use Psr\Container\ContainerInterface;
 use App\Controller\autorizarCPEAutomotorController;
+use App\Controller\autorizarCPEAutomotorDGController;
 use App\Controller\confirmacionDefinitivaCPEAutomotorController;
 use App\Controller\confirmarArriboCPEController;
 use App\Controller\consultarCPEAutomotorController;
@@ -28,6 +29,9 @@ $container->set('ultNroOrdenController', function (ContainerInterface $container
     return new ultNroOrdenController($container);
 });
 
+$container->set('autorizarCPEAutomotorDGController', function (ContainerInterface $container) {
+    return new autorizarCPEAutomotorDGController($container);
+});
 $container->set('autorizarCPEAutomotorController', function (ContainerInterface $container) {
     return new autorizarCPEAutomotorController($container);
 });

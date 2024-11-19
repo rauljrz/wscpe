@@ -20,7 +20,7 @@ class baseMethod extends AfipWebService {
     */
   	var $URL 			= 'https://cpea-ws.afip.gob.ar/wscpe/services/soap';
 	var $WSDL_TEST 		= 'ws_scpe.wsdl';
-	var $URL_TEST 		= 'https://fwshomo.afip.gov.ar/wscpe/services/soap';
+    var $URL_TEST       = 'https://cpea-ws-qaext.afip.gob.ar/wscpe/services/soap';
 
     var $ta  = null;
     var $cuit= null;
