@@ -1,0 +1,27 @@
+# Activar el motor de reescritura
+RewriteEngine On
+
+# Forzar HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Impedir el acceso directo a archivos sensibles y estáticos
+<FilesMatch "(\.env|\.htaccess|\.git|composer\.(json|lock)|phpunit\.xml|^.*\.(log|bak|sql))$">
+    Require all denied
+</FilesMatch>
+
+# Opcional: Bloquear cualquier otro archivo que no sea PHP
+# RewriteCond %{REQUEST_URI} !\.php$
+# RewriteRule .* - [F,L]
+
+# Redirigir todo el tráfico a index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+# Evitar la caché del navegador
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</IfModule>

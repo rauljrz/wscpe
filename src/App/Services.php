@@ -4,8 +4,10 @@ use Psr\Container\ContainerInterface;
 use App\Controller\autorizarCPEAutomotorController;
 use App\Controller\autorizarCPEAutomotorDGController;
 use App\Controller\confirmacionDefinitivaCPEAutomotorController;
+use App\Controller\confirmacionDefinitivaCPEAutomotorControllerDG;
 use App\Controller\confirmarArriboCPEController;
 use App\Controller\consultarCPEAutomotorController;
+use App\Controller\consultarCPEAutomotorDGController;
 use App\Controller\CPEAutomotorPDFController;
 use App\Controller\provinciaController;
 use App\Controller\localidadController;
@@ -40,6 +42,11 @@ $container->set('consultarCPEAutomotorController', function (ContainerInterface 
     return new consultarCPEAutomotorController($container);
 });
 
+$container->set('consultarCPEAutomotorDGController', function (ContainerInterface $container) {
+    return new consultarCPEAutomotorDGController($container);
+});
+
+
 $container->set('CPEAutomotorPDFController', function (ContainerInterface $container) {
     return new CPEAutomotorPDFController($container);
 });
@@ -50,6 +57,10 @@ $container->set('confirmarArriboCPEController', function (ContainerInterface $co
 
 $container->set('confirmacionDefinitivaCPEAutomotorController', function (ContainerInterface $container) {
     return new confirmacionDefinitivaCPEAutomotorController($container);
+});
+
+$container->set('confirmacionDefinitivaCPEAutomotorDGController', function (ContainerInterface $container) {
+    return new confirmacionDefinitivaCPEAutomotorDGController($container);
 });
 
 $container->set('cgBuscarCtgController', function (ContainerInterface $container) {

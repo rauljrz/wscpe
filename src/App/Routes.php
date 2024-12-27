@@ -28,9 +28,17 @@ return function (App $app) {
         $app->get('/consultarTiposGrano', tipoGranoController::class);
         $app->get('/consultarUltNroOrden', ultNroOrdenController::class);
         $app->get('/consultarCPEAutomotor', consultarCPEAutomotorController::class);
+        $app->get('/consultarCPEAutomotorDG', consultarCPEAutomotorDGController::class);
         $app->get('/CPEAutomotorPDF', CPEAutomotorPDFController::class);
         $app->get('/confirmarArriboCPE', confirmarArriboCPEController::class);
+        
+        #-- Ruta para que funcione las empresas con codigo anterior al 2024.11.20
         $app->get('/confirmacionDefinitiva', confirmacionDefinitivaCPEAutomotorController::class);
+        
+        #-- Apartir del 2024.11.20 por SuperDiet
+        $app->get('/confirmacionDefinitivaCPEAutomotor'  , confirmacionDefinitivaCPEAutomotorController::class);
+        $app->get('/confirmacionDefinitivaCPEAutomotorDG', confirmacionDefinitivaCPEAutomotorDGController::class);
+        
         $app->get('/cgBuscarCtg', cgBuscarCtgController::class);
     });
 };
