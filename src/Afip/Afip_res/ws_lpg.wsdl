@@ -5735,7 +5735,7 @@
 	</wsdl:binding>
 	<wsdl:service name="LpgService">
 		<wsdl:port name="LpgEndPoint" binding="tns:LpgBinding">
-			<soap:address location="https://serviciosjava.afip.gob.ar:443/wslpg/LpgService" />
+			<soap:address location="https://fwshomo.afip.gov.ar:443/wslpg/LpgService" />
 		</wsdl:port>
 	</wsdl:service>
 

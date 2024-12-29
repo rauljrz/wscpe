@@ -4,7 +4,7 @@ use Psr\Container\ContainerInterface;
 use App\Controller\autorizarCPEAutomotorController;
 use App\Controller\autorizarCPEAutomotorDGController;
 use App\Controller\confirmacionDefinitivaCPEAutomotorController;
-use App\Controller\confirmacionDefinitivaCPEAutomotorControllerDG;
+use App\Controller\confirmacionDefinitivaCPEAutomotorDGController;
 use App\Controller\confirmarArriboCPEController;
 use App\Controller\consultarCPEAutomotorController;
 use App\Controller\consultarCPEAutomotorDGController;
@@ -13,7 +13,9 @@ use App\Controller\provinciaController;
 use App\Controller\localidadController;
 use App\Controller\tipoGranoController;
 use App\Controller\ultNroOrdenController;
-use App\Controller\cgBuscarCtgController;
+use App\Controller\lpg\cgBuscarCtgController;
+use App\Controller\lpg\cgAutorizarController;
+use App\Controller\lpg\cgConsultarUltimoNroOrdenController;
 
 $container->set('provinciaController', function (ContainerInterface $container) {
     return new provinciaController($container);
@@ -65,4 +67,10 @@ $container->set('confirmacionDefinitivaCPEAutomotorDGController', function (Cont
 
 $container->set('cgBuscarCtgController', function (ContainerInterface $container) {
     return new cgBuscarCtgController($container);
+});
+$container->set('cgAutorizarController', function (ContainerInterface $container) {
+    return new cgAutorizarController($container);
+});
+$container->set('cgConsultarUltimoNroOrdenController', function (ContainerInterface $container) {
+    return new cgConsultarUltimoNroOrdenController($container);
 });

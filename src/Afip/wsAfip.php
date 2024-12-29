@@ -162,13 +162,12 @@ class wsAfip {
 			$this->WSAA_URL = 'https://wsaahomo.afip.gov.ar/ws/services/LoginCms';
 		}
 		if (!file_exists($this->CERT)) 
-			throw new \Exception("Failed to open ".$this->CERT."\n", 1);
+			throw new \Exception("No se encontro el archivo: ".strstr($this->CERT, '/certificados')."\n", 1);
 		if (!file_exists($this->PRIVATEKEY)) 
-			throw new \Exception("Failed to open ".$this->PRIVATEKEY."\n", 2);
+			throw new \Exception("No se encontro el archivo: ".strstr($this->PRIVATEKEY, '/certificados')."\n", 2);
 		if (!file_exists($this->WSAA_WSDL)) 
-			throw new \Exception("Failed to open ".$this->WSAA_WSDL."\n", 3);
+			throw new \Exception("No se encontro el archivo: ".strstr($this->WSAA_WSDL, '/certificados')."\n", 3);
 	}
-
 	/**
 	 * Gets token authorization for an AFIP Web Service
 	 *

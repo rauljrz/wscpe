@@ -1,0 +1,65 @@
+{
+    "cabecera": {
+        "tipoCertificado": "P",                     
+        "ptoEmision": 4,                            
+        "nroOrden": 455,                            
+        "nroIngBrutoDepositario": 9114408532,       
+        "titularGrano": "T",                        
+        "cuitDepositante": 20147686030,             
+        "nroIngBrutoDepositante": 20147686030,      
+        "codGrano": 19,                             
+        "campania": 2324,                           
+        "cuitCorredor": 0,                          
+        "datosAdicionales": "Pto. Emisión: 4   Nro. Orden: 455   Nro. Interno:    Se debita además:   SELLADO A: $ 0.25   SELLADO A: $ 0.25   SELLADO C.D.A.: $ 61.06"
+    },
+    "primaria": {
+        "nroActDepositario": 29,                    
+        "ctg": [
+            {
+                "nroCTG": 10120531215,              
+                "nroCartaDePorte": 400000765,       
+                "pesoNetoConfirmadoDefinitivo": 31500.00,  
+                "porcentajeSecadoHumedad": 0.00,    
+                "importeSecado": 0.00,              
+                "pesoNetoMermaSecado": 0.00,        
+                "tarifaSecado": 0.00,               
+                "importeZarandeo": 0.00,            
+                "pesoNetoMermaZarandeo": 0.00,      
+                "tarifaZarandeo": 0.00              
+            },
+            {
+                "nroCTG": 10120531233,              
+                "nroCartaDePorte": 400000766,       
+                "pesoNetoConfirmadoDefinitivo": 30900.00,  
+                "porcentajeSecadoHumedad": 0.00,    
+                "importeSecado": 0.00,              
+                "pesoNetoMermaSecado": 0.00,        
+                "tarifaSecado": 0.00,               
+                "importeZarandeo": 0.00,            
+                "pesoNetoMermaZarandeo": 0.00,      
+                "tarifaZarandeo": 0.00              
+            }
+        ],
+        "descripcionTipoGrano": "MAIZ",             
+        "montoAlmacenaje": 0.00,                    
+        "montoAcarreo": 0.00,                       
+        "montoGastosGenerales": 0.00,               
+        "montoZarandeo": 0.00,                      
+        "porcentajeSecadoDe": 0.00,                 
+        "porcentajeSecadoA": 0.00,                  
+        "montoSecado": 0.00,                        
+        "montoPorCadaPuntoExceso": 0.00,            
+        "montoOtros": 0.00,                         
+        "calidad": {
+            "analisisMuestra": 2,                   
+            "nroBoletin": 2,                        
+            "codGrado": "G2",                       
+            "valorContProteico": 0.00,              
+            "valorFactor": 100.000                  
+        },
+        "pesoNetoMermaVolatil": 0.00,              
+        "serviciosConceptosNoGravados": 0.00,       
+        "serviciosPercepcionesIVA": 0.00,           
+        "serviciosOtrasPercepciones": 0.00          
+    }
+}
