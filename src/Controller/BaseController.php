@@ -58,6 +58,20 @@ abstract class BaseController
         );
         return $wsAfip->wsLPG;
     }
+        /**
+     * @param int $cuit
+     */
+    protected function wsFE($cuit) {
+        $wsAfip = new wsAfip(array(
+			'CUIT'      => $cuit,
+			'production'=> $this->production,
+			'res_folder'=> $this->folder_Certf,
+			'ta_folder' => $this->folder_Token,
+            'app_debug' => $_ENV['APP_DEBUG'],
+            'log_folder'=> $this->folder_Logger)
+        );
+        return $wsAfip->wsFE;
+    }
 
     /**
      * @param array|object|null $message

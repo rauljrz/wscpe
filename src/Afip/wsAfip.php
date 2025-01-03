@@ -95,7 +95,8 @@ class wsAfip {
 		'RegisterScopeTen',
 		'RegisterScopeThirteen',
 		'wsCPE',
-		'wsLPG'
+		'wsLPG',
+		'wsFE'
 	);
 
 	function __construct($options)

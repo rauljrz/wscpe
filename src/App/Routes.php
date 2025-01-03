@@ -46,5 +46,9 @@ return function (App $app) {
             $app->post('/cgAutorizar', cgAutorizarController::class);
             $app->get('/cgConsultarUltimoNroOrden', cgConsultarUltimoNroOrdenController::class);
         });
+    
+        $app->group('/wsfe', function ($app) {
+            $app->get('/FEDummy', FEDummyController::class);
+        });
     });
 };
