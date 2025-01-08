@@ -19,6 +19,8 @@ use App\Controller\lpg\cgConsultarUltimoNroOrdenController;
 
 //* Factura Electronica - *//
 use App\Controller\wsfe\FEDummyController;
+use App\Controller\wsfe\FECAEAConsultarController;
+use App\Controller\wsfe\FEParamGetTiposCbteController;
 
 $container->set('provinciaController', function (ContainerInterface $container) {
     return new provinciaController($container);
@@ -79,4 +81,11 @@ $container->set('cgConsultarUltimoNroOrdenController', function (ContainerInterf
 });
 $container->set('FEDummyController', function (ContainerInterface $container) {
     return new FEDummyController($container);
+});
+$container->set('FECAEAConsultarController', function (ContainerInterface $container) {
+    return new FECAEAConsultarController($container);
+});
+
+$container->set('FEParamGetTiposCbteController', function (ContainerInterface $container) {
+    return new FEParamGetTiposCbteController($container);
 });

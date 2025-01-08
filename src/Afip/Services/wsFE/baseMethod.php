@@ -23,7 +23,7 @@ class baseMethod extends AfipWebService {
     function __construct($params)
     {
         parent::__construct($params);
-        $this->ta  = $this->afip->GetServiceTA('wslpg');
+        $this->ta  = $this->afip->GetServiceTA('wsfe');
         $this->cuit= $this->afip->CUIT;
     }
 

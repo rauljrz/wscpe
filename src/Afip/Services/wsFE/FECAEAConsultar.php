@@ -11,9 +11,9 @@
  * @date 2024-01-03
  **/
 
-class FEDummy extends baseMethod {
+class FECAEAConsultar extends baseMethod {
 
-	public function run()
+	public function run($input)
 	{		
 		// Auth params
 		$params = array(
@@ -21,16 +21,23 @@ class FEDummy extends baseMethod {
 				'Token' => $this->ta->token,
 				'Sign' => $this->ta->sign,
 				'Cuit' => $this->cuit
-			)
+			),
+			'Periodo' => $input['Periodo'],
+			'Orden' => $input['Orden']
 		);
 
 		try {
-			$response = parent::ExecuteRequest('FEDummy', $params);
+			$response = parent::ExecuteRequest('FECAEAConsultar', $params);
+
 			if (is_string($response)) throw new \Exception($response);
 
-			if (isset($response->FEDummyResult)) return $this->processSuccess($response->FEDummyResult);
+			if (!isset($response->FECAEAConsultarResult)) throw new \Exception('No se recibio objeto con respuestas');
+
+			$result = $response->FECAEAConsultarResult;
+			if (isset($result->Errors)) throw new \Exception($result->Errors->Err->Msg);
 			
-			return $this->processError($response);
+			return $this->processSuccess($result->ResultGet);
+
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());
 		}

@@ -11,7 +11,7 @@
  * @date 2024-01-03
  **/
 
-class FEDummy extends baseMethod {
+class FEParamGetTiposCbte extends baseMethod {
 
 	public function run()
 	{		
@@ -25,12 +25,15 @@ class FEDummy extends baseMethod {
 		);
 
 		try {
-			$response = parent::ExecuteRequest('FEDummy', $params);
+			$response = parent::ExecuteRequest('FEParamGetTiposCbte', $params);
 			if (is_string($response)) throw new \Exception($response);
 
-			if (isset($response->FEDummyResult)) return $this->processSuccess($response->FEDummyResult);
+			if (!isset($response->FEParamGetTiposCbteResult)) throw new \Exception('No se recibio objeto con respuestas');
+
+			$result = $response->FEParamGetTiposCbteResult;
+			if (isset($result->Errors)) throw new \Exception($result->Errors->Err->Msg);
 			
-			return $this->processError($response);
+			return $this->processSuccess($result->ResultGet);
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());
 		}

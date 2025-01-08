@@ -49,6 +49,8 @@ return function (App $app) {
     
         $app->group('/wsfe', function ($app) {
             $app->get('/FEDummy', FEDummyController::class);
+            $app->get('/FECAEAConsultar', FECAEAConsultarController::class);
+            $app->get('/FEParamGetTiposCbte', FEParamGetTiposCbteController::class);
         });
     });
 };
