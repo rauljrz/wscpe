@@ -30,6 +30,6 @@ class cgBuscarCtgController extends BaseController
                           'campania'        => $campania)
                       );
 
-        return $this->jsonResponse($response, 'success', $data, 200); 
+        return $this->validateResult($response, $data);
     }
 }

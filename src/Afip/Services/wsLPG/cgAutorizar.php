@@ -116,6 +116,11 @@ class cgAutorizar extends baseMethod {
 
 		try {
 			$response = parent::ExecuteRequest('cgAutorizar', $params);
+			
+			return $this->processResponse($response);
+
+			
+
 			if (is_string($response)) throw new \Exception($response);
 
 			if (isset($response->respuesta)) return $this->processSuccess($response->respuesta);

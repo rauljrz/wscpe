@@ -73,6 +73,16 @@ abstract class BaseController
         return $wsAfip->wsFE;
     }
 
+    protected function validateResult(Response $response, array $data)
+    {
+        if (isset($data['status']) && $data['status'] === 'error')
+            return $this->jsonResponse($response, 'error', $data['message'], $data['code'] ?? 500);
+
+        return $this->jsonResponse($response,
+                        'success',
+                        $data['data'],
+                        200); 
+    }
     /**
      * @param array|object|null $message
      */

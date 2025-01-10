@@ -16,6 +16,7 @@ use App\Controller\ultNroOrdenController;
 use App\Controller\lpg\cgBuscarCtgController;
 use App\Controller\lpg\cgAutorizarController;
 use App\Controller\lpg\cgConsultarUltimoNroOrdenController;
+use App\Controller\lpg\cgConsultarXCoeController;
 
 //* Factura Electronica - *//
 use App\Controller\wsfe\FEDummyController;
@@ -79,6 +80,11 @@ $container->set('cgAutorizarController', function (ContainerInterface $container
 $container->set('cgConsultarUltimoNroOrdenController', function (ContainerInterface $container) {
     return new cgConsultarUltimoNroOrdenController($container);
 });
+$container->set('cgConsultarXCoeController', function (ContainerInterface $container) {
+    return new cgConsultarXCoeController($container);
+});
+
+/* Factura Electronica */
 $container->set('FEDummyController', function (ContainerInterface $container) {
     return new FEDummyController($container);
 });

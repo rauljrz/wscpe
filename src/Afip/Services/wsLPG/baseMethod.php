@@ -27,22 +27,43 @@ class baseMethod extends AfipWebService {
         $this->cuit= $this->afip->CUIT;
     }
 
+    protected function processResponse($retrieved)
+    {
+        if (!isset($retrieved->oReturn) && !isset($retrieved->liqUltNroOrdenReturn))
+            return $this->processError('Respuesta inválida del servicio', 502);
+
+        $oReturn = $retrieved->oReturn ?? $retrieved->liqUltNroOrdenReturn;
+
+        if (isset($oReturn->errores)) {
+            $error = is_array($oReturn->errores) 
+                    ? $oReturn->errores[0]->descripcion 
+                    : $oReturn->errores->error->descripcion;
+            
+            return $this->processError($error, 422);
+        }
+
+        return $this->processSuccess($oReturn);
+    }
+
     protected function processSuccess($message)
     {
-        if (isset($message) && empty($message) && !is_int($message)) {
-            return $this->jsonResponse('error', 'No se recibio datos', 201);
-        }
-        return $this->jsonResponse('success', $message, 200);
+        if (!isset($message) || (empty($message) && !is_numeric($message)))
+            return $this->processError('No se recibieron datos', 204);
+        
+        return [
+            'status' => 'success',
+            'data' => $message,
+            'code' => 200
+        ];
     }
 
-    protected function processError($message)
+    protected function processError($message, $code = 500)
     {
-        return $this->jsonResponse('error', $message, 511);
-    }
-
-    protected function jsonResponse(string $status, $message, int $code)
-    {
-        return $message;
+        return [
+            'status' => 'error',
+            'message' => $message,
+            'code' => $code
+        ];
     }
 
 }

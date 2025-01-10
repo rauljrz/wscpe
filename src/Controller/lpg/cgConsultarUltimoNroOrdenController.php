@@ -22,6 +22,6 @@ class cgConsultarUltimoNroOrdenController extends BaseController
                           'ptoEmision' => $ptoEmision
                       ));
                       
-        return $this->jsonResponse($response, 'success', $data->liqUltNroOrdenReturn, 200); 
+        return $this->validateResult($response, $data);
     }
 }

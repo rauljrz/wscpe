@@ -45,6 +45,7 @@ return function (App $app) {
             $app->get('/cgBuscarCtg', cgBuscarCtgController::class);
             $app->post('/cgAutorizar', cgAutorizarController::class);
             $app->get('/cgConsultarUltimoNroOrden', cgConsultarUltimoNroOrdenController::class);
+            $app->get('/cgConsultarXCoe', cgConsultarXCoeController::class);
         });
     
         $app->group('/wsfe', function ($app) {

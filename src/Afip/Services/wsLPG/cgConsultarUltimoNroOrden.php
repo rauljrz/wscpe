@@ -28,12 +28,9 @@ class cgConsultarUltimoNroOrden extends baseMethod {
 		);
 
 		try {
-			$response = parent::ExecuteRequest('cgConsultarUltimoNroOrden', $params);
+			$retrieved = parent::ExecuteRequest('cgConsultarUltimoNroOrden', $params);
 
-			if (isset($response->respuesta))
-				return $this->processSuccess($response->respuesta);
-
-			return $this->processError($response);
+			return $this->processResponse($retrieved);
 
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());

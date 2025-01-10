@@ -11,7 +11,7 @@
  * @version 1.0
  **/
 
-class cgBuscarCtg extends baseMethod {
+class cgConsultarXCoe extends baseMethod {
 
 	public function run($input)
 	{		
@@ -21,15 +21,12 @@ class cgBuscarCtg extends baseMethod {
 					'sign' 	=> $this->ta->sign,
 					'cuit' 	=> $this->cuit
 				),
-			'tipoCertificado' => $input['tipoCertificado'],
-			'cuitDepositante' => $input['cuitDepositante'],
-			'nroPlanta'       => $input['nroPlanta'],
-			'codGrano'        => $input['codGrano'],
-			'campania'        => $input['campania']
+			'coe' => $input['coe']
 		);
 
 		try {
-			$response = parent::ExecuteRequest('cgBuscarCtg', $params);
+			$response = parent::ExecuteRequest('cgConsultarXCoe', $params);
+
 			return $this->processResponse($response);
 
 		} catch (Exception $e) {
