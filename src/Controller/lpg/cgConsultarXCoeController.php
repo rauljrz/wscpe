@@ -20,6 +20,16 @@ class cgConsultarXCoeController extends BaseController
                       ->cgConsultarXCoe
                       ->run(['coe' => $coe]);
         
-        return $this->validateResult($response, $data);
+        if (isset($data['status']) && $data['status'] === 'error')
+            return $this->jsonResponse($response, 'error', $data['message'], $data['code'] ?? 500);
+
+        $message = array(
+            'ptoEmision'      => $data['data']->autorizacion->ptoEmision,
+            'nroOrden'        => $data['data']->autorizacion->nroOrden,
+            'coe'             => $coe,
+            'estado'          => $data['data']->autorizacion->estado,
+            'pdf'             => base64_encode($data['data']->pdf),
+        );
+        return $this->jsonResponse($response, 'success', $message, 200);
     }
 }

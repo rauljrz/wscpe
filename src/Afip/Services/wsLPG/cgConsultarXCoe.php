@@ -21,7 +21,8 @@ class cgConsultarXCoe extends baseMethod {
 					'sign' 	=> $this->ta->sign,
 					'cuit' 	=> $this->cuit
 				),
-			'coe' => $input['coe']
+			'coe' => $input['coe'],
+			'pdf' => 'S'
 		);
 
 		try {
