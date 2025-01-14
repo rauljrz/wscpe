@@ -35,11 +35,16 @@ class baseMethod extends AfipWebService {
         $oReturn = $retrieved->oReturn ?? $retrieved->liqUltNroOrdenReturn;
 
         if (isset($oReturn->errores)) {
-            $error = is_array($oReturn->errores) 
-                    ? $oReturn->errores[0]->descripcion 
-                    : $oReturn->errores->error->descripcion;
+            $error = [
+                'codigo' => is_array($oReturn->errores) 
+                    ? $oReturn->errores[0]->codigo
+                    : $oReturn->errores->error->codigo,
+                'descripcion' => is_array($oReturn->errores)
+                    ? $oReturn->errores[0]->descripcion
+                    : $oReturn->errores->error->descripcion
+            ];
             
-            return $this->processError($error, 422);
+            return $this->processError(['error' => $error], 422);
         }
 
         return $this->processSuccess($oReturn);
