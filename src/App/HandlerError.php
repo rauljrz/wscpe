@@ -6,6 +6,53 @@ use Slim\Psr7\Response;
 
 $errorMiddleware = $app->addErrorMiddleware($_ENV['APP_DEBUG'] === 'true', true, true);
 
+$errorMiddleware->setDefaultErrorHandler(
+    function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) use ($container) {
+        $logger = $container->get(\Psr\Log\LoggerInterface::class);
+        $response = new Response();
+        $statusCode = 500;
+        $content = 'application/problem+json';
+        
+        $filename = 'errors_' . date('Ymd');
+        $maxAge = strtotime('-2 months');
+        
+        // Limpiar logs antiguos
+        $files = glob('errors_*.log');
+        foreach($files as $file) {
+            $fileDate = substr(basename($file, '.log'), 7); // Extrae YYYYMMDD
+            if(strtotime($fileDate) < $maxAge) {
+                unlink($file);
+            }
+        }
+        
+        $logger->pushHandler(new \Monolog\Handler\StreamHandler($filename . '.log'));
+        $logger->error($exception->getMessage(), [
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+        ]);
+            
+        $data = [
+            'message' => $displayErrorDetails ? $exception->getMessage() : 'Ha ocurrido un error interno',
+            'status' => 'Error',
+            'code' => $statusCode
+        ];
+
+        if($_ENV['APP_DEBUG'] === 'true' && $displayErrorDetails) {
+            $data['details'] = [
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+                'trace' => $exception->getTraceAsString()
+            ];
+        }
+
+        $body = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
+        $response->getBody()->write((string) $body);
+
+        return $response->withStatus($statusCode)
+                        ->withHeader('Content-type', $content);
+    });
+
 // Set the Not Found Handler
 $errorMiddleware->setErrorHandler(
     HttpNotFoundException::class,
@@ -47,4 +94,4 @@ $errorMiddleware->setErrorHandler(
     });
 
 $errorHandler = $errorMiddleware->getDefaultErrorHandler();
-$errorHandler->forceContentType('application/json');
+// $errorHandler->forceContentType('application/json');

@@ -265,7 +265,7 @@ class wsAfip {
 		$this->logger($client->__getLastRequest(), 'loginCms.log');
 
 		if (is_soap_fault($results)) 
-			throw new \Exception("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n", 4);
+			throw new \Exception("Error al loguearse en ARCA: ".$results->faultcode." - ".$results->faultstring, 4);
 
 		$TA = $results->loginCmsReturn;
 

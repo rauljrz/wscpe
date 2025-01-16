@@ -15,9 +15,9 @@ return function (Container $container) {
             'logErrors' => true,
             'baseDir'   => $baseDir,
             'logger' => [
-                'name'  => 'API-wscpe',
+                'name'  => 'Errors',
                 'path'  => $baseDir.'/logs/',
-                'file'  => 'app.log',
+                'file'  => 'errors_'.date('Ymd').'.log',
                 'level' => Logger::DEBUG,
             ],
             'connection' => [
