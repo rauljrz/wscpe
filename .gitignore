@@ -11,3 +11,13 @@ composer.lock
 /.idea/*
 /certificados/
 /token/
+/public/
+/storage/
+/bootstrap/cache/
+/database/
+*.bak
+*.log
+*.sql
+*.sql.gz
+*.sql.bz2
+*.sql.xz

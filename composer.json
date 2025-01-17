@@ -1,5 +1,5 @@
 {
-    "name": "API restful SOAP WSCPE",
+    "name": "rauljrz/apirestful-soap-wsarca",
     "descripcion": "API para proveer acceso al sistema en VFP de los recursos del SOAP AFIP WSCPE",
     "authors":[
         {
@@ -12,12 +12,14 @@
         "php": "^7.4",
         "monolog/monolog": "^2.3",
         "php-di/php-di": "^6.3",
+        "phpmailer/phpmailer": "^6.7",
         "respect/validation": "^2.2",
         "slim/psr7": "^1.5",
         "slim/slim": "4.*",
         "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
+        "mockery/mockery": "1.4",
         "phpunit/phpunit": "^9.0"
     },
     "config": {
@@ -31,7 +33,10 @@
         "psr-4": {
             "App\\": "src/",
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -44,6 +49,11 @@
         "restart": "php extras/bin/restart-db.php",
         "restart-db": "php extras/bin/restart-db.php",
         "start": "php -S localhost:8080 -t public public/index.php",
-        "test": "phpunit"
+        "test": "phpunit",
+        "test:u": "phpunit --testsuite Unit",
+        "test:verbose": "phpunit --testsuite Unit --verbose --debug",
+        "test:controllers": "phpunit --testsuite Unit --filter Controllers",
+        "test:models": "phpunit --testsuite Unit --filter Models",
+        "test:routes": "phpunit --testsuite Unit --filter Routes"
     }
 }

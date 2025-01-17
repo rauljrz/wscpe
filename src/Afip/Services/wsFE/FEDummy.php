@@ -15,7 +15,6 @@ class FEDummy extends baseMethod {
 
 	public function run()
 	{		
-		// Auth params
 		$params = array(
 			'Auth' => array(
 				'Token' => $this->ta->token,
@@ -25,12 +24,9 @@ class FEDummy extends baseMethod {
 		);
 
 		try {
-			$response = parent::ExecuteRequest('FEDummy', $params);
-			if (is_string($response)) throw new \Exception($response);
+			$retrieved = parent::ExecuteRequest('FEDummy', $params);
 
-			if (isset($response->FEDummyResult)) return $this->processSuccess($response->FEDummyResult);
-			
-			return $this->processError($response);
+			return $this->processResponse($retrieved, 'FEDummyResult');
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());
 		}

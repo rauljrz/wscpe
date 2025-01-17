@@ -76,7 +76,7 @@ abstract class BaseController
     protected function validateResult(Response $response, array $data)
     {
         if (isset($data['status']) && $data['status'] === 'error')
-            return $this->jsonResponse($response, 'error', $data['message'], $data['code'] ?? 500);
+            return $this->jsonResponse($response, 'error', $data['message'], 422);
 
         return $this->jsonResponse($response,
                         'success',

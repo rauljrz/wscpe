@@ -27,22 +27,45 @@ class baseMethod extends AfipWebService {
         $this->cuit= $this->afip->CUIT;
     }
 
+    protected function processResponse($retrieved, string $metodo)
+    {
+        
+        if (!isset($retrieved->$metodo))
+            return $this->processError('Respuesta inválida del servicio');
+
+        $object = $retrieved->$metodo;
+
+        if (isset($object->errores)) {
+            $error = [
+                'codigo' => is_array($object->errores) 
+                    ? $object->errores[0]->codigo
+                    : $object->errores->error->codigo,
+                'descripcion' => is_array($object->errores)
+                    ? $object->errores[0]->descripcion
+                    : $object->errores->error->descripcion
+            ];
+            
+            return $this->processError(['error' => $error]);
+        }
+
+        return $this->processSuccess($object);
+    }
     protected function processSuccess($message)
     {
-        if (isset($message) && empty($message) && !is_int($message)) {
-            return $this->jsonResponse('error', 'No se recibio datos', 201);
-        }
-        return $this->jsonResponse('success', $message, 200);
+        if (!isset($message) || (empty($message) && !is_numeric($message)))
+            return $this->processError('No se recibieron datos');
+        
+        return [
+            'status' => 'success',
+            'data' => $message
+        ];
     }
 
     protected function processError($message)
     {
-        return $this->jsonResponse('error', $message, 511);
+        return [
+            'status' => 'error',
+            'message' => $message
+        ];
     }
-
-    protected function jsonResponse(string $status, $message, int $code)
-    {
-        return $message;
-    }
-
 }

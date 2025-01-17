@@ -15,11 +15,17 @@ class FEDummyController extends BaseController
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        
-        $data  = $this->wsFE($args['cuit'])
-                      ->FEDummy
-                      ->run();
+        $data = $this->wsFE($args['cuit'])
+                    ->FEDummy
+                    ->run();
 
-        return $this->jsonResponse($response, 'success', $data, 200); 
+        if ($data['status'] === 'success') {
+            $data['data'] = [
+                'Servidor de aplicaciones (AppServer)' => $data['data']->AppServer,
+                'Servidor de base de datos (DbServer)' => $data['data']->DbServer, 
+                'Servidor de autenticación (AuthServer)' => $data['data']->AuthServer
+            ];
+        }
+        return $this->validateResult($response, $data);
     }
 }

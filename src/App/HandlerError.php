@@ -32,7 +32,7 @@ $errorMiddleware->setDefaultErrorHandler(
         ]);
             
         $data = [
-            'message' => $displayErrorDetails ? $exception->getMessage() : 'Ha ocurrido un error interno',
+            'message' => $exception->getMessage(),
             'status' => 'Error',
             'code' => $statusCode
         ];
@@ -94,4 +94,4 @@ $errorMiddleware->setErrorHandler(
     });
 
 $errorHandler = $errorMiddleware->getDefaultErrorHandler();
-// $errorHandler->forceContentType('application/json');
+//$errorHandler->forceContentType('application/json');
