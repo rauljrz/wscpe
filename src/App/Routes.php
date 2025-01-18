@@ -52,6 +52,7 @@ return function (App $app) {
             $app->get('/FEDummy', FEDummyController::class);
             $app->get('/FECAEAConsultar', FECAEAConsultarController::class);
             $app->get('/FEParamGetTiposCbte', FEParamGetTiposCbteController::class);
+            $app->get('/FECompUltimoAutorizado', FECompUltimoAutorizadoController::class);
         });
     })->add(new \App\Middleware\AfipCertificateMiddleware());
 };

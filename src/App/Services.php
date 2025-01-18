@@ -22,6 +22,7 @@ use App\Controller\lpg\cgConsultarXCoeController;
 use App\Controller\wsfe\FEDummyController;
 use App\Controller\wsfe\FECAEAConsultarController;
 use App\Controller\wsfe\FEParamGetTiposCbteController;
+use App\Controller\wsfe\FECompUltimoAutorizadoController;
 
 $container->set('provinciaController', function (ContainerInterface $container) {
     return new provinciaController($container);
@@ -94,4 +95,8 @@ $container->set('FECAEAConsultarController', function (ContainerInterface $conta
 
 $container->set('FEParamGetTiposCbteController', function (ContainerInterface $container) {
     return new FEParamGetTiposCbteController($container);
+});
+$container->set('FECompUltimoAutorizadoController', function (ContainerInterface $container) {
+    return new FECompUltimoAutorizadoController($container);
+
 });
