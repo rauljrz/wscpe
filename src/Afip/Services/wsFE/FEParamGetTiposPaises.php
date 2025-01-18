@@ -1,7 +1,7 @@
 <?php
 /**
  * AFIP - Web Service Factura Electronica
- * FEParamGetTiposCbte
+ * FEParamGetTiposPaises
  *
  * @link https://www.afip.gob.ar/ws/WSFEV1/documentos/manual-desarrollador-COMPG-v3-4-2.pdf
  *
@@ -11,7 +11,7 @@
  * @date 2024-01-03
  **/
 
-class FEParamGetTiposCbte extends baseMethod {
+class FEParamGetTiposPaises extends baseMethod {
 
 	public function run()
 	{		
@@ -25,9 +25,9 @@ class FEParamGetTiposCbte extends baseMethod {
 		);
 
 		try {
-			$retrieved = parent::ExecuteRequest('FEParamGetTiposCbte', $params);
+			$retrieved = parent::ExecuteRequest('FEParamGetTiposPaises', $params);
 
-			return $this->processResponse($retrieved, 'FEParamGetTiposCbteResult');
+			return $this->processResponse($retrieved, 'FEParamGetTiposPaisesResult');
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());
 		}

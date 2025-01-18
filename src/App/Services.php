@@ -23,6 +23,7 @@ use App\Controller\wsfe\FEDummyController;
 use App\Controller\wsfe\FECAEAConsultarController;
 use App\Controller\wsfe\FEParamGetTiposCbteController;
 use App\Controller\wsfe\FECompUltimoAutorizadoController;
+use App\Controller\wsfe\FEParamGetTiposPaisesController;
 
 $container->set('provinciaController', function (ContainerInterface $container) {
     return new provinciaController($container);
@@ -98,5 +99,7 @@ $container->set('FEParamGetTiposCbteController', function (ContainerInterface $c
 });
 $container->set('FECompUltimoAutorizadoController', function (ContainerInterface $container) {
     return new FECompUltimoAutorizadoController($container);
-
+});
+$container->set('FEParamGetTiposPaisesController', function (ContainerInterface $container) {
+    return new FEParamGetTiposPaisesController($container);
 });
