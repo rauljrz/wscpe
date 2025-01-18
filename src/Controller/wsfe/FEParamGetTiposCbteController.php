@@ -17,6 +17,6 @@ class FEParamGetTiposCbteController extends BaseController
                       ->FEParamGetTiposCbte
                       ->run();
 
-        return $this->jsonResponse($response, 'success', $data, 200); 
+        return $this->validateResult($response, $data);
     }
 }

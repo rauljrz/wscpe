@@ -25,15 +25,9 @@ class FEParamGetTiposCbte extends baseMethod {
 		);
 
 		try {
-			$response = parent::ExecuteRequest('FEParamGetTiposCbte', $params);
-			if (is_string($response)) throw new \Exception($response);
+			$retrieved = parent::ExecuteRequest('FEParamGetTiposCbte', $params);
 
-			if (!isset($response->FEParamGetTiposCbteResult)) throw new \Exception('No se recibio objeto con respuestas');
-
-			$result = $response->FEParamGetTiposCbteResult;
-			if (isset($result->Errors)) throw new \Exception($result->Errors->Err->Msg);
-			
-			return $this->processSuccess($result->ResultGet);
+			return $this->processResponse($retrieved, 'FEParamGetTiposCbteResult');
 		} catch (Exception $e) {
 			return $this->processError($e->getMessage());
 		}
