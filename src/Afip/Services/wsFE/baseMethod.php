@@ -35,14 +35,14 @@ class baseMethod extends AfipWebService {
 
         $object = $retrieved->$metodo;
 
-        if (isset($object->errores)) {
+        if (isset($object->Errors)) {
             $error = [
-                'codigo' => is_array($object->errores) 
-                    ? $object->errores[0]->codigo
-                    : $object->errores->error->codigo,
-                'descripcion' => is_array($object->errores)
-                    ? $object->errores[0]->descripcion
-                    : $object->errores->error->descripcion
+                'codigo' => is_array($object->Errors) 
+                    ? $object->Errors[0]->Code
+                    : $object->Errors->Err->Code,
+                'descripcion' => is_array($object->Errors)
+                    ? $object->Errors[0]->Msg
+                    : $object->Errors->Err->Msg
             ];
             
             return $this->processError(['error' => $error]);
