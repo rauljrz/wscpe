@@ -54,6 +54,8 @@ return function (App $app) {
             $app->get('/FEParamGetTiposCbte', FEParamGetTiposCbteController::class);
             $app->get('/FECompUltimoAutorizado', FECompUltimoAutorizadoController::class);
             $app->get('/FEParamGetTiposPaises', FEParamGetTiposPaisesController::class);
+            $app->get('/FEParamGetActividades', FEParamGetActividadesController::class);
+            $app->get('/FECompConsultar', FECompConsultarController::class);
         });
     })->add(new \App\Middleware\AfipCertificateMiddleware());
 };
