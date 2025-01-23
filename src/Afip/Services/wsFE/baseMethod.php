@@ -48,7 +48,7 @@ class baseMethod extends AfipWebService {
             return $this->processError(['error' => $error]);
         }
 
-        return $this->processSuccess($object->ResultGet);
+        return $this->processSuccess(isset($object->ResultGet) ? $object->ResultGet : $object);
     }
     protected function processSuccess($message)
     {

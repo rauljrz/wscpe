@@ -49,13 +49,26 @@ return function (App $app) {
         });
     
         $app->group('/wsfe', function ($app) {
-            $app->get('/FEDummy', FEDummyController::class);
             $app->get('/FECAEAConsultar', FECAEAConsultarController::class);
-            $app->get('/FEParamGetTiposCbte', FEParamGetTiposCbteController::class);
-            $app->get('/FECompUltimoAutorizado', FECompUltimoAutorizadoController::class);
-            $app->get('/FEParamGetTiposPaises', FEParamGetTiposPaisesController::class);
-            $app->get('/FEParamGetActividades', FEParamGetActividadesController::class);
+            $app->get('/FECAESolicitar', FECAESolicitarController::class);
             $app->get('/FECompConsultar', FECompConsultarController::class);
+            $app->get('/FECompUltimoAutorizado', FECompUltimoAutorizadoController::class);
+            $app->get('/FEDummy', FEDummyController::class);
+            $app->get('/FEParamGetActividades', FEParamGetActividadesController::class);
+            $app->get('/FEParamGetCotizacion', FEParamGetCotizacionController::class);
+            $app->get('/FEParamGetPtosVenta', FEParamGetPtosVentaController::class);
+            $app->get('/FEParamGetTiposCbte', FEParamGetTiposCbteController::class);
+            $app->get('/FEParamGetTiposConcepto', FEParamGetTiposConceptoController::class);
+            $app->get('/FEParamGetTiposDoc', FEParamGetTiposDocController::class);
+            $app->get('/FEParamGetTiposIva', FEParamGetTiposIvaController::class);
+            $app->get('/FEParamGetTiposMonedas', FEParamGetTiposMonedasController::class);
+            $app->get('/FEParamGetTiposPaises', FEParamGetTiposPaisesController::class);
+            $app->get('/FEParamGetTiposTributos', FEParamGetTiposTributosController::class);
         });
+    
+        $app->group('/bcra', function ($app) {
+            $app->get('/Cotizaciones[/{moneda}]', CotizacionesController::class);
+        });
+
     })->add(new \App\Middleware\AfipCertificateMiddleware());
 };
