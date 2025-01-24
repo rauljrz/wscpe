@@ -73,6 +73,34 @@ abstract class BaseController
         return $wsAfip->wsFE;
     }
 
+    protected function validateInput(array $input, array $required_fields)
+    {
+        $missing_fields = [];
+        foreach ($required_fields as $field) {
+            $found = false;
+            
+            // Verificar primer nivel
+            if (isset($input[$field])) {
+                dd('se encontro ' . $field);
+                $found = true;
+            } else {
+                // Verificar segundo nivel
+                foreach ($input as $key => $value) {
+                    if (is_array($value) && isset($value[$field])) {
+                        $found = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!$found) {
+                $missing_fields[] = $field;
+            }
+        }
+        
+        if (!empty($missing_fields))
+            throw new \Exception('Campos requeridos faltantes: ' . implode(', ', $missing_fields));
+    }
     protected function validateResult(Response $response, array $data)
     {
         if (isset($data['status']) && $data['status'] === 'error')
