@@ -50,7 +50,7 @@ return function (App $app) {
     
         $app->group('/wsfe', function ($app) {
             $app->get('/FECAEAConsultar', FECAEAConsultarController::class);
-            $app->get('/FECAESolicitar', FECAESolicitarController::class);
+            $app->post('/FECAESolicitar', FECAESolicitarController::class);
             $app->get('/FECompConsultar', FECompConsultarController::class);
             $app->get('/FECompUltimoAutorizado', FECompUltimoAutorizadoController::class);
             $app->get('/FEDummy', FEDummyController::class);

@@ -75,13 +75,16 @@ abstract class BaseController
 
     protected function validateInput(array $input, array $required_fields)
     {
+
+        if (!is_array($input) || empty($input))
+            throw new \Exception('Los datos de entrada son inválidos o están vacíos');
+
         $missing_fields = [];
         foreach ($required_fields as $field) {
             $found = false;
             
             // Verificar primer nivel
             if (isset($input[$field])) {
-                dd('se encontro ' . $field);
                 $found = true;
             } else {
                 // Verificar segundo nivel
@@ -101,6 +104,7 @@ abstract class BaseController
         if (!empty($missing_fields))
             throw new \Exception('Campos requeridos faltantes: ' . implode(', ', $missing_fields));
     }
+
     protected function validateResult(Response $response, array $data)
     {
         if (isset($data['status']) && $data['status'] === 'error')

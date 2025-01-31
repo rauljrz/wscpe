@@ -14,22 +14,17 @@ class FECompUltimoAutorizadoController extends BaseController
     private const API_VERSION = '1.01.0';
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $body = $request->getBody()->getContents();
-        $input = json_decode($body, true);
+        $required_fields = ['ptovta', 'cbtetipo'];
+        $body = $request->getParsedBody();
 
-        if (!isset($input['PtoVta']) || !is_int($input['PtoVta']) ||
-            !isset($input['CbteTipo']) || !is_int($input['CbteTipo'])) {
-            return $this->jsonResponse(
-                $response,
-                'error',
-                'Se requiere PtoVta y CbteTipo como números enteros',
-                422
-            );
-        }
+        $this->validateInput($body, $required_fields);
 
         $data = $this->wsFE($args['cuit'])
                     ->FECompUltimoAutorizado
-                    ->run($input);
+                    ->run(array(
+                        'PtoVta' => $body['ptovta'],
+                        'CbteTipo' => $body['cbtetipo']
+                    ));
 
         return $this->validateResult($response, $data);
     }

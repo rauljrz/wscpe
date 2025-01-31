@@ -13,23 +13,18 @@ class FECompConsultarController extends BaseController
     private const API_VERSION = '1.01.0';
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $body = $request->getBody()->getContents();
-        $input = json_decode($body, true);
+        $required_fields = ['cbtetipo', 'cbtenro', 'ptovta'];
+        $body = $request->getParsedBody();
 
-        if (!isset($input['CbteTipo']) || !is_int($input['CbteTipo']) ||
-            !isset($input['CbteNro']) || !is_int($input['CbteNro']) ||
-            !isset($input['PtoVta']) || !is_int($input['PtoVta'])) {
-            return $this->jsonResponse(
-                $response,
-                'error',
-                'Se requiere CbteTipo, CbteNro y PtoVta como números enteros',
-                422
-            );
-        }
+        $this->validateInput($body, $required_fields);
 
         $data  = $this->wsFE($args['cuit'])
                       ->FECompConsultar
-                      ->run($input);
+                      ->run(array(
+                        'CbteTipo' => $body['cbtetipo'],
+                        'CbteNro' => $body['cbtenro'],
+                        'PtoVta' => $body['ptovta']
+                      ));
 
         return $this->validateResult($response, $data);
     }

@@ -19,13 +19,6 @@ class FEDummyController extends BaseController
                     ->FEDummy
                     ->run();
 
-        if ($data['status'] === 'success') {
-            $data['data'] = [
-                'Servidor de aplicaciones (AppServer)' => $data['data']->AppServer,
-                'Servidor de base de datos (DbServer)' => $data['data']->DbServer, 
-                'Servidor de autenticación (AuthServer)' => $data['data']->AuthServer
-            ];
-        }
         return $this->validateResult($response, $data);
     }
 }
