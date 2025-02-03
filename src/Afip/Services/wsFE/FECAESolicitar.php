@@ -24,125 +24,125 @@ class FECAESolicitar extends baseMethod {
 			),
 			'FeCAEReq' => array (
                 'FeCabReq' => array (
-                    'CantReg' => $input['FeCabReq']['CantReg'],
-                    'CbteTipo' => $input['FeCabReq']['CbteTipo'],
-                    'PtoVta' => $input['FeCabReq']['PtoVta']
+                    'CantReg' => $input['fecabreq']['cantreg'],
+                    'CbteTipo' => $input['fecabreq']['cbtetipo'],
+                    'PtoVta' => $input['fecabreq']['ptovta']
                 ),
                 'FeDetReq' => array (
                     'FECAEDetRequest' => array(
-                        'Concepto' => $input['FeDetReq']['Concepto'],
-                        'DocTipo' => $input['FeDetReq']['DocTipo'],
-                        'DocNro' => $input['FeDetReq']['DocNro'],
-                        'CbteDesde' => $input['FeDetReq']['CbteDesde'],
-                        'CbteHasta' => $input['FeDetReq']['CbteHasta'],
-                        'CbteFch' => $input['FeDetReq']['CbteFch'],
-                        'ImpTotal' => number_format(abs($input['FeDetReq']['ImpTotal']),2,'.',''),
-                        'ImpTotConc' => number_format(abs($input['FeDetReq']['ImpTotConc']),2,'.',''),
-                        'ImpNeto' => number_format(abs($input['FeDetReq']['ImpNeto']),2,'.',''),
-                        'ImpOpEx' => number_format(abs($input['FeDetReq']['ImpOpEx']),2,'.',''),
-                        'ImpTrib' => number_format(abs($input['FeDetReq']['ImpTrib']),2,'.',''),
-                        'ImpIVA' => number_format(abs($input['FeDetReq']['ImpIVA']),2,'.',''),
-                        'FchServDesde' => $input['FeDetReq']['FchServDesde'],
-                        'FchServHasta' => $input['FeDetReq']['FchServHasta'],
-                        'FchVtoPago' => $input['FeDetReq']['FchVtoPago'],
-                        'MonId' => $input['FeDetReq']['MonId'],
-                        'MonCotiz' => $input['FeDetReq']['MonCotiz']
+                        'Concepto' => $input['fedetreq']['concepto'],
+                        'DocTipo' => $input['fedetreq']['doctipo'],
+                        'DocNro' => $input['fedetreq']['docnro'],
+                        'CbteDesde' => $input['fedetreq']['cbtedesde'],
+                        'CbteHasta' => $input['fedetreq']['cbtehasta'],
+                        'CbteFch' => $input['fedetreq']['cbtefch'],
+                        'ImpTotal' => number_format(abs($input['fedetreq']['imptotal']),2,'.',''),
+                        'ImpTotConc' => number_format(abs($input['fedetreq']['imptotconc']),2,'.',''),
+                        'ImpNeto' => number_format(abs($input['fedetreq']['impneto']),2,'.',''),
+                        'ImpOpEx' => number_format(abs($input['fedetreq']['impopex']),2,'.',''),
+                        'ImpTrib' => number_format(abs($input['fedetreq']['imptrib']),2,'.',''),
+                        'ImpIVA' => number_format(abs($input['fedetreq']['impiva']),2,'.',''),
+                        'FchServDesde' => $input['fedetreq']['fchservdesde'],
+                        'FchServHasta' => $input['fedetreq']['fchservhasta'],
+                        'FchVtoPago' => $input['fedetreq']['fchvtopago'],
+                        'MonId' => $input['fedetreq']['monid'],
+                        'MonCotiz' => $input['fedetreq']['moncotiz']
                     )
                 )
             ),
 		);
         
-        if (isset($input['CbtesAsoc'])){
+        if (isset($input['cbtesasoc'])){
             $CbtesAsoc = array(
                 'CbteAsoc' => array()
             );
-            foreach ($input['CbtesAsoc'] as $comprobante) {
+            foreach ($input['cbtesasoc'] as $comprobante) {
                 $CbtesAsoc['CbteAsoc'][] = array(
-                    'Tipo' => $comprobante['Tipo'],
-                    'PtoVta' => $comprobante['PtoVta'],
-                    'Nro' => $comprobante['Nro'],
-                    'Cuit' => $comprobante['Cuit'],
-                    'CbteFch' => $comprobante['CbteFch']
+                    'Tipo' => $comprobante['tipo'],
+                    'PtoVta' => $comprobante['ptovta'],
+                    'Nro' => $comprobante['nro'],
+                    'Cuit' => $comprobante['cuit'],
+                    'CbteFch' => $comprobante['cbtefch']
                 );
             }
 
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['CbtesAsoc'] = $CbtesAsoc;
         }
         
-        if (isset($input['Tributos']) ) {
+        if (isset($input['tributos']) ) {
             $Tributos = array(
                 'Tributo' => array ()
             );
-            foreach ($input['Tributos'] as $unTributo) {
+            foreach ($input['tributos'] as $unTributo) {
                 $Tributos['Tributo'][] = array(
-                        'Id' => $unTributo['Id'],
-                        'Desc' => $unTributo['Desc'],
-                        'BaseImp' => number_format(abs($unTributo['BaseImp']),2,'.',''),
-                        'Alic' => number_format(abs($unTributo['Alic']),2,'.',''),
-                        'Importe' => number_format(abs($unTributo['Importe']),2,'.','')
+                        'Id' => $unTributo['id'],
+                        'Desc' => $unTributo['desc'],
+                        'BaseImp' => number_format(abs($unTributo['baseimp']),2,'.',''),
+                        'Alic' => number_format(abs($unTributo['alic']),2,'.',''),
+                        'Importe' => number_format(abs($unTributo['importe']),2,'.','')
                 );
             }
             
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['Tributos'] = $Tributos;
         }
 
-        if (isset($input['Iva'])) {
+        if (isset($input['iva'])) {
             $Iva = array(
                 'AlicIva' => array()
             );
-            foreach ($input['Iva'] as $alicuota) {
+            foreach ($input['iva'] as $alicuota) {
                 $Iva['AlicIva'][] = array(
-                    'Id' => $alicuota['Id'],
-                    'BaseImp' => number_format(abs($alicuota['BaseImp']),2,'.',''),
-                    'Importe' => number_format(abs($alicuota['Importe']),2,'.','')
+                    'Id' => $alicuota['id'],
+                    'BaseImp' => number_format(abs($alicuota['baseimp']),2,'.',''),
+                    'Importe' => number_format(abs($alicuota['importe']),2,'.','')
                 );
             }
 
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['Iva'] = $Iva;
         }
 
-        if (isset($input['Opcionales'])) {
+        if (isset($input['opcionales'])) {
             $Opcionales = array(
                 'Opcional' => array()
             );
-            foreach ($input['Opcionales'] as $opcional) {
+            foreach ($input['opcionales'] as $opcional) {
                 $Opcionales['Opcional'][] = array(
-                    'Id' => $opcional['Id'],
-                    'Valor' => $opcional['Valor']
+                    'Id' => $opcional['id'],
+                    'Valor' => $opcional['valor']
                 );
             }
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['Opcionales'] = $Opcionales;
         }
 
-        if (isset($input['Compradores'])) {
+        if (isset($input['compradores'])) {
             $Compradores = array(
                 'Comprador' => array()
             );
-            foreach ($input['Compradores'] as $comprador) {
+            foreach ($input['compradores'] as $comprador) {
                 $Compradores['Comprador'][] = array(
-                    'DocTipo' => $comprador['DocTipo'],
-                    'DocNro' => $comprador['DocNro'],
-                    'Porcentaje' => $comprador['Porcentaje']
+                    'DocTipo' => $comprador['doctipo'],
+                    'DocNro' => $comprador['docnro'],
+                    'Porcentaje' => $comprador['porcentaje']
                 );
             }
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['Compradores'] = $Compradores;
         }
 
-        if (isset($input['PeriodoAsoc'])) {
+        if (isset($input['periodoasoc'])) {
             $PeriodoAsoc = array(
-                "FchDesde" => $input['PeriodoAsoc']['FchDesde'],
-                "FchHasta" => $input['PeriodoAsoc']['FchHasta']
+                "FchDesde" => $input['periodoasoc']['fchdesde'],
+                "FchHasta" => $input['periodoasoc']['fchhasta']
             );
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['PeriodoAsoc'] = $PeriodoAsoc;
         }
 
-        if (isset($input['Actividades'])) {
+        if (isset($input['actividades'])) {
             $Actividades = array(
                 'Actividad' => array()
             );
-            foreach ($input['Actividades'] as $actividad) {
+            foreach ($input['actividades'] as $actividad) {
                 $Actividades['Actividad'][] = array(
-                    'Id' => $actividad['Id']
+                    'Id' => $actividad['id']
                 );
             }
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['Actividades'] = $Actividades;

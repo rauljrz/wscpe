@@ -9,6 +9,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface AS Response;
 use Psr\Http\Message\ServerRequestInterface AS Request;
 use Respect\Validation\Rules\Uppercase;
+use App\Exception\ValidationException;
 
 abstract class BaseController
 {
@@ -75,9 +76,9 @@ abstract class BaseController
 
     protected function validateInput(array $input, array $required_fields)
     {
-
-        if (!is_array($input) || empty($input))
-            throw new \Exception('Los datos de entrada son inválidos o están vacíos');
+        if (!is_array($input) || empty($input)) {
+            throw new ValidationException('Los datos de entrada son inválidos o están vacíos');
+        }
 
         $missing_fields = [];
         foreach ($required_fields as $field) {
@@ -101,8 +102,9 @@ abstract class BaseController
             }
         }
         
-        if (!empty($missing_fields))
-            throw new \Exception('Campos requeridos faltantes: ' . implode(', ', $missing_fields));
+        if (!empty($missing_fields)) {
+            throw new ValidationException('Campos requeridos faltantes: ' . implode(', ', $missing_fields));
+        }
     }
 
     protected function validateResult(Response $response, array $data)

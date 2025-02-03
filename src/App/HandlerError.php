@@ -3,6 +3,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Exception\HttpMethodNotAllowedException;
 use Slim\Psr7\Response;
+use App\Exception\ValidationException;
 
 $errorMiddleware = $app->addErrorMiddleware($_ENV['APP_DEBUG'] === 'true', true, true);
 
@@ -92,6 +93,28 @@ $errorMiddleware->setErrorHandler(
         return $response->withStatus($statusCode)
                         ->withHeader('Content-type', $content);
     });
+
+$errorMiddleware->setErrorHandler(
+    ValidationException::class,
+    function (ServerRequestInterface $request, Throwable $exception, bool $displayErrorDetails) {
+        $response = new Response();
+        $statusCode = $exception instanceof ValidationException ? $exception->getStatusCode() : 422;
+        
+        $data = [
+            'message' => $exception->getMessage(),
+            'status' => 'Error',
+            'code' => $statusCode
+        ];
+
+        $body = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
+        $response->getBody()->write((string) $body);
+
+        return $response
+            ->withStatus($statusCode)
+            ->withHeader('Content-type', 'application/problem+json');
+    }
+);
 
 $errorHandler = $errorMiddleware->getDefaultErrorHandler();
 //$errorHandler->forceContentType('application/json');
