@@ -20,9 +20,7 @@ class FEParamGetCotizacionController extends BaseController
 
         $data  = $this->wsFE($args['cuit'])
                       ->FEParamGetCotizacion
-                      ->run(array(
-                        'MonId' => $body['monid']
-                      ));
+                      ->run($body);
 
         return $this->validateResult($response, $data);
     }

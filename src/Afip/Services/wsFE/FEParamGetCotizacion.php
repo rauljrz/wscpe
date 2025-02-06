@@ -22,8 +22,12 @@ class FEParamGetCotizacion extends baseMethod {
 				'Sign' => $this->ta->sign,
 				'Cuit' => $this->cuit
 			),
-			'MonId' => $input['MonId']
+			'MonId' => $input['monid']
 		);
+
+		if (isset($input['fchcotiz'])) {
+			$params['FchCotiz'] = $input['fchcotiz'];
+		}
 
 		try {
 			$retrieved = parent::ExecuteRequest('FEParamGetCotizacion', $params);
