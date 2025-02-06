@@ -55,6 +55,7 @@ return function (App $app) {
             $app->get('/FECompUltimoAutorizado', FECompUltimoAutorizadoController::class);
             $app->get('/FEDummy', FEDummyController::class);
             $app->get('/FEParamGetActividades', FEParamGetActividadesController::class);
+            $app->get('/FEParamGetCondicionIvaReceptor', FEParamGetCondicionIvaReceptorController::class);
             $app->get('/FEParamGetCotizacion', FEParamGetCotizacionController::class);
             $app->get('/FEParamGetPtosVenta', FEParamGetPtosVentaController::class);
             $app->get('/FEParamGetTiposCbte', FEParamGetTiposCbteController::class);

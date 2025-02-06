@@ -25,6 +25,7 @@ use App\Controller\wsfe\FECompConsultarController;
 use App\Controller\wsfe\FECompUltimoAutorizadoController;
 use App\Controller\wsfe\FEDummyController;
 use App\Controller\wsfe\FEParamGetActividadesController;
+use App\Controller\wsfe\FEParamGetCondicionIvaReceptorController;
 use App\Controller\wsfe\FEParamGetCotizacionController;
 use App\Controller\wsfe\FEParamGetPtosVentaController;
 use App\Controller\wsfe\FEParamGetTiposCbteController;
@@ -117,6 +118,9 @@ $container->set('FEDummyController', function (ContainerInterface $container) {
 });
 $container->set('FEParamGetActividadesController', function (ContainerInterface $container) {
     return new FEParamGetActividadesController($container);
+});
+$container->set('FEParamGetCondicionIvaReceptorController', function (ContainerInterface $container) {
+    return new FEParamGetCondicionIvaReceptorController($container);
 });
 $container->set('FEParamGetCotizacionController', function (ContainerInterface $container) {
     return new FEParamGetCotizacionController($container);
