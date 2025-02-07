@@ -46,12 +46,17 @@ class FECAESolicitar extends baseMethod {
                         'FchServHasta' => $input['fedetreq']['fchservhasta'],
                         'FchVtoPago' => $input['fedetreq']['fchvtopago'],
                         'MonId' => $input['fedetreq']['monid'],
+                        'CondicionIVAReceptorId' => $input['fedetreq']['condicionivareceptorid'],
                         'MonCotiz' => $input['fedetreq']['moncotiz']
                     )
                 )
             ),
 		);
-        
+
+        if ($input['fedetreq']['monid']!='PES' && isset($input['fedetreq']['canmismonext'])){
+            $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['CanMisMonExt'] = $input['fedetreq']['canmismonext'];
+        }
+
         if (isset($input['cbtesasoc'])){
             $CbtesAsoc = array(
                 'CbteAsoc' => array()
@@ -147,7 +152,6 @@ class FECAESolicitar extends baseMethod {
             }
             $params['FeCAEReq']['FeDetReq']['FECAEDetRequest']['Actividades'] = $Actividades;
         }
-
 
 		try {
 			$retrieved = parent::ExecuteRequest('FECAESolicitar', $params);

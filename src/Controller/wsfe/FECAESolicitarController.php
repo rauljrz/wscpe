@@ -18,7 +18,7 @@ class FECAESolicitarController extends BaseController
             'cbtetipo', 'ptovta', 'concepto', 'doctipo', 'docnro',
             'cbtedesde', 'cbtehasta', 'cbtefch', 'imptotal', 'imptotconc',
             'impneto', 'impopex', 'imptrib', 'impiva', 'fchservdesde',
-            'fchservhasta', 'fchvtopago', 'monid', 'moncotiz'
+            'fchservhasta', 'fchvtopago', 'monid', 'moncotiz','condicionivareceptorid'
         ];
 
         $body = $request->getBody()->getContents();
